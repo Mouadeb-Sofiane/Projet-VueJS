@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <h1 class="h1">Test</h1>
 </template>
+
+<style lang="scss">
+.h1 {
+  color: red;
+  &:hover {
+    color: green;
+  }
+}
+</style>
