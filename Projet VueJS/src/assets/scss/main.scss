@@ -1,0 +1,9 @@
+// foundations
+@import "foundations/variables";
+@import "foundations/functions";
+@import "foundations/mixins";
+@import "foundations/normalize";
+
+img {
+  max-width: 100%;
+}
