@@ -2,11 +2,9 @@
 import { ref } from 'vue';
 import Button from './Button.vue';
 
-// Modèle pour les champs du formulaire
 const email = ref('');
 const password = ref('');
 
-// Fonction de gestion de la soumission du formulaire
 function handleSubmit() {
     alert(`Email: ${email.value} | Password: ${password.value}`);
 }
@@ -65,8 +63,8 @@ body {
 
         .form-label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: rem(8px);
+            font-size: rem(14px);
             color: $gray;
         }
 
