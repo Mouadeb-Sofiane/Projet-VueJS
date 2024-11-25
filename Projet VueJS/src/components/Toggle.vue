@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
+// État du bouton bascule (true = activé, false = désactivé)
 const isActive = ref(false);
 
+// Fonction pour basculer l'état
 const toggleState = () => {
   isActive.value = !isActive.value;
   console.log("Toggle State:", isActive.value ? "true" : "false");
@@ -15,14 +17,15 @@ const toggleState = () => {
         :class="['toggle', isActive ? 'true' : 'false']"
         @click="toggleState"
       >
-        <div class="track -font"></div>
-        <div class="thumb -font"></div>
+        <div class="track"></div>
+        <div class="thumb"></div>
       </div>
       
+      <!-- Affichage du texte True ou False -->
       <p>{{ isActive ? 'True' : 'False' }}</p>
     </div>
 </template>
-  
+
 <style lang="scss">
 .toggle {
   cursor: pointer;
@@ -50,15 +53,10 @@ const toggleState = () => {
   &.false {
     .track {
       background-color: $color-false;
-      .-font {
-        font-family: $fontTextFamily;
-      }
     }
+
     .thumb {
       left: 6px;
-      .-font {
-        font-family: $fontTextFamily;
-      }
     }
   }
 
@@ -66,9 +64,16 @@ const toggleState = () => {
     .track {
       background-color: $color-true;
     }
+
     .thumb {
       left: 30px;
     }
   }
+
+  .track, .thumb {
+    font-family: $fontTextFamily; 
+  }
 }
 </style>
+
+  
