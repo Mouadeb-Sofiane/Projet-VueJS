@@ -40,43 +40,41 @@ export const Default: Story = {
   },
 };
 
-
 export const PreEcrit: Story = {
-    render: (args) => ({
-      components: { Form, Button },
-      setup() {
-        return { args };
-      },
-      template: `
-        <Form 
-          v-bind="args"
-          @submit="args.onSubmit"
-        />
-      `,
-    }),
-    args: {
-      email: 'test@example.com',
-      password: '123456789',
+  render: (args) => ({
+    components: { Form, Button },
+    setup() {
+      return { args };
     },
-  };
-  
-  export const EmailPasValide: Story = {
-    render: (args) => ({
-      components: { Form, Button },
-      setup() {
-        return { args };
-      },
-      template: `
-        <Form 
-          v-bind="args"
-          @submit="args.onSubmit"
-        />
-      `,
-    }),
-    args: {
-      email: 'EmailPasValide',
-      password: 'MotDePasseSecurise',
+    template: `
+      <Form 
+        v-bind="args"
+        @submit="args.onSubmit"
+      />
+    `,
+  }),
+  args: {
+    email: 'test@example.com',
+    password: '123456789',
+  },
+};
+
+export const EmailPasValide: Story = {
+  render: (args) => ({
+    components: { Form, Button },
+    setup() {
+      return { args };
     },
-  };
-  
-  
+    template: `
+      <Form 
+        v-bind="args"
+        @submit="args.onSubmit"
+      />
+    `,
+  }),
+  args: {
+    email: 'EmailPasValide',
+    password: 'MotDePasseSecurise',
+  },
+};
+
