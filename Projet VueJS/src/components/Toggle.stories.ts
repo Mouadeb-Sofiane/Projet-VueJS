@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import Toggle from "./Toggle.vue";
 
 const meta: Meta<typeof Toggle> = {
-  title: "Components/Toggle",
+  title: "Elements/Toggle",
   component: Toggle,
   argTypes: {
     initialState: {
