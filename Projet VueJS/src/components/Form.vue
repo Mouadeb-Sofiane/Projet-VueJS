@@ -2,9 +2,11 @@
 import { ref } from 'vue';
 import Button from './Button.vue';
 
+// Modèle pour les champs du formulaire
 const email = ref('');
 const password = ref('');
 
+// Fonction de gestion de la soumission du formulaire
 function handleSubmit() {
     alert(`Email: ${email.value} | Password: ${password.value}`);
 }
@@ -51,15 +53,15 @@ body {
 
 
 .form {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+    max-width: rem(450px);
+    margin: rem(50px) auto;
+    padding: rem(20px);
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: rem(8px);
+    box-shadow: 0 rem(4px) rem(6px) rgba(0, 0, 0, 0.1);
 
     .form-group {
-        margin-bottom: 16px;
+        margin-bottom: rem(16px);
 
         .form-label {
             display: block;
@@ -69,11 +71,11 @@ body {
         }
 
         .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 16px;
+            width: 92%;
+            padding: rem(12px) rem(16px);
+            font-size: rem(16px);
             border: 1px solid $gray;
-            border-radius: 4px;
+            border-radius: rem(4px);
             transition: border-color 0.3s;
 
             &:focus {
@@ -85,14 +87,14 @@ body {
 
     .form-button {
         width: 100%;
-        padding: 12px 16px;
+        padding: rem(12px) rem(16px);
         background-color: $primary-color;
         color: white;
-        font-size: 16px;
+        font-size: rem(16px);
         font-weight: bold;
         text-align: center;
         border: none;
-        border-radius: 4px;
+        border-radius: rem(4px);
         cursor: pointer;
         transition: background-color 0.3s;
 
