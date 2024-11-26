@@ -77,3 +77,17 @@ export const Disable: Story = {
       disabled: true
     },
   };
+
+  export const SmallBTN: Story = {
+    render: (args) => ({
+      components: { Button },
+      setup() {
+        return { args };
+      },
+      template: `<Button v-bind="args">${args.default}</Button>`,
+    }),
+    args: {
+      default: 'Small Btn',
+      variant: 'small',
+    },
+  };

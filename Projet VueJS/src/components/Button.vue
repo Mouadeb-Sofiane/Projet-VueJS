@@ -3,7 +3,7 @@ import { defineProps } from 'vue';
 
 defineProps<{
     disabled?: boolean,
-    variant?: "primary" | "outline" | "disable" | "small" | "getstarted";
+    variant?: "primary" | "outline" | "disable" | "small" ;
 }>();
 
 </script>
@@ -12,7 +12,8 @@ defineProps<{
     <button :class="{
       'button': true, 
     '-outline' : variant === 'outline',
-    '-disabled' : disabled
+    '-disabled' : disabled,
+    '-small' : variant === 'small',
     }">
         <slot></slot>
     </button>
