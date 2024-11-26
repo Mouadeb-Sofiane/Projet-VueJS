@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import Form from './Form.vue';
-import Button from './Button.vue';
 
 const meta: Meta<typeof Form> = {
   title: 'Elements/Form',
@@ -20,9 +19,9 @@ const meta: Meta<typeof Form> = {
 
 export default meta;
 
-export const Default: StoryObj = {
+export const Default: StoryObj<typeof Form> = {
   render: (args) => ({
-    components: { Form, Button },
+    components: { Form },
     setup() {
       return { args };
     },
@@ -39,9 +38,9 @@ export const Default: StoryObj = {
   },
 };
 
-export const PreEcrit: StoryObj = {
+export const PreEcrit: StoryObj<typeof Form> = {
   render: (args) => ({
-    components: { Form, Button },
+    components: { Form },
     setup() {
       return { args };
     },
@@ -58,9 +57,9 @@ export const PreEcrit: StoryObj = {
   },
 };
 
-export const EmailPasValide: StoryObj = {
+export const EmailPasValide: StoryObj<typeof Form> = {
   render: (args) => ({
-    components: { Form, Button },
+    components: { Form },
     setup() {
       return { args };
     },
@@ -76,4 +75,3 @@ export const EmailPasValide: StoryObj = {
     password: 'MotDePasseSecurise',
   },
 };
-
