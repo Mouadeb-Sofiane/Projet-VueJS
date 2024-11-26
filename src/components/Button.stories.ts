@@ -1,39 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-
-import Button from './Button.vue';
+import type { Meta, StoryObj } from "@storybook/vue3";
+import Button from "./Button.vue";
 
 const meta: Meta<typeof Button> = {
-  title: 'Elements/Button',
+  title: "Elements/Button",
   component: Button,
   argTypes: {
-      variant: {
-          control: {type: 'select'} ,
-          options: ['primary','outline','disable','small'] 
-      }
-  }
+    variant: {
+      control: { type: "select" },
+      options: ["primary", "outline", "disable", "small"],
+    },
+  },
 };
 
 export default meta;
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/api/csf
- * to learn how to use render functions.
- */
-export const Primary: StoryObj =  {
-
+export const Primary: StoryObj = {
   render: (args) => ({
     components: { Button },
     setup() {
       return { args };
     },
-    template: `<Button v-bind="args">${args.default}</Button>`,
+    template: `<Button v-bind="args">{{ args.label }}</Button>`, // Remplacez args.default par args.label
   }),
   args: {
-    default: 'Button',
+    label: "Button", // Remplacez "default" par une prop nommée pour le contenu
   },
 };
-
 
 export const Outline: StoryObj = {
   render: (args) => ({
@@ -41,85 +33,80 @@ export const Outline: StoryObj = {
     setup() {
       return { args };
     },
-    template: `<Button v-bind="args">${args.default}</Button>`,
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
   }),
   args: {
-    default: 'Button',
-    variant: 'outline'
+    label: "Button",
+    variant: "outline",
   },
 };
 
 export const Disable: StoryObj = {
-    render: (args) => ({
-      components: { Button },
-      setup() {
-        return { args };
-      },
-      template: `<Button v-bind="args">${args.default}</Button>`,
-    }),
-    args: {
-      default: 'Button',
-      variant: 'disable'
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
     },
-  };
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
+  }),
+  args: {
+    label: "Button",
+    variant: "disable",
+  },
+};
 
-  export const DisablePrimary: StoryObj = {
-    render: (args) => ({
-      components: { Button },
-      setup() {
-        return { args };
-      },
-      template: `<Button v-bind="args">${args.default}</Button>`,
-    }),
-    args: {
-      default: 'Connexion',
-      variant: 'outline',
-      disabled: true
+export const DisablePrimary: StoryObj = {
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
     },
-  };
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
+  }),
+  args: {
+    label: "Connexion",
+    variant: "outline",
+    disabled: true,
+  },
+};
 
-
-  export const SmallBTN: StoryObj = {
-
-    render: (args) => ({
-      components: { Button },
-      setup() {
-        return { args };
-      },
-      template: `<Button v-bind="args">${args.default}</Button>`,
-    }),
-    args: {
-
-      default: 'Connexion',
-      variant: 'small'
+export const SmallBTN: StoryObj = {
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
     },
-  };
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
+  }),
+  args: {
+    label: "Connexion",
+    variant: "small",
+  },
+};
 
-  export const Long: StoryObj = {
-    render: (args) => ({
-      components: { Button },
-      setup() {
-        return { args };
-      },
-      template: `<Button v-bind="args">${args.default}</Button>`,
-    }),
-    args: {
-      default: 'Connexion',
+export const Long: StoryObj = {
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
     },
-  };
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
+  }),
+  args: {
+    label: "Connexion",
+  },
+};
 
-  export const GetStarted: StoryObj = {
-    render: (args) => ({
-      components: { Button },
-      setup() {
-        return { args };
-      },
-      template: `<Button v-bind="args">${args.default}</Button>`,
-    }),
-    args: {
-      default: 'Get started',
-      variant: 'getstarted'
+export const GetStarted: StoryObj = {
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
     },
-  };
-  
-
+    template: `<Button v-bind="args">{{ args.label }}</Button>`,
+  }),
+  args: {
+    label: "Get started",
+    variant: "getstarted",
+  },
+};
