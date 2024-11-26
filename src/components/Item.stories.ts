@@ -18,7 +18,6 @@ const meta: Meta<typeof Item> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Item>;
 
 export const Default: StoryObj = {
   render: (args) => ({
