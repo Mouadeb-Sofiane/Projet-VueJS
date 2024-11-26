@@ -79,7 +79,6 @@ export const Disable: Story = {
   };
 
 
-  export const Small: Story = 
   export const SmallBTN: Story = {
 
     render: (args) => ({
@@ -123,9 +122,4 @@ export const Disable: Story = {
     },
   };
   
-
-      default: 'Small Btn',
-      variant: 'small',
-    },
-  };
 
