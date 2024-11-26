@@ -77,3 +77,45 @@ export const Disable: Story = {
       disabled: true
     },
   };
+
+  export const Small: Story = {
+    render: (args) => ({
+      components: { Button },
+      setup() {
+        return { args };
+      },
+      template: `<Button v-bind="args">${args.default}</Button>`,
+    }),
+    args: {
+      default: 'Connexion',
+      variant: 'small'
+    },
+  };
+
+  export const Long: Story = {
+    render: (args) => ({
+      components: { Button },
+      setup() {
+        return { args };
+      },
+      template: `<Button v-bind="args">${args.default}</Button>`,
+    }),
+    args: {
+      default: 'Connexion',
+    },
+  };
+
+  export const GetStarted: Story = {
+    render: (args) => ({
+      components: { Button },
+      setup() {
+        return { args };
+      },
+      template: `<Button v-bind="args">${args.default}</Button>`,
+    }),
+    args: {
+      default: 'Get started',
+      variant: 'getstarted'
+    },
+  };
+  
