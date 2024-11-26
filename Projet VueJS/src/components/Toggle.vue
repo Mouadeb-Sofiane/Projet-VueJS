@@ -70,6 +70,11 @@ const toggleState = () => {
   .track, .thumb {
     font-family: $fontTextFamily; 
   }
+
+  &.-outline {
+    background: transparent;
+    color: $primaryColor;
+  }
 }
 </style>
 
