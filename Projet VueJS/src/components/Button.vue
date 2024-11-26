@@ -3,7 +3,10 @@ import { defineProps } from 'vue';
 
 defineProps<{
     disabled?: boolean,
-    variant?: "primary" | "outline" | "disable" | "small" ;
+
+    variant?: "primary" | "outline" | "disable" | "small" | "long" | "getstarted";
+
+
 }>();
 
 </script>
@@ -14,6 +17,10 @@ defineProps<{
     '-outline' : variant === 'outline',
     '-disabled' : disabled,
     '-small' : variant === 'small',
+
+    '-long' : variant === 'long',
+    '-getstarted' : variant === 'getstarted'
+
     }">
         <slot></slot>
     </button>
@@ -62,15 +69,15 @@ defineProps<{
     justify-content: center;
     align-items: center;
     color: $black;
-    border: $white;
     background-color: $white;
+    border: $black;
   }
   &.-long {
     width: rem(250px);
     height: rem(48px);
     padding: rem(16px) rem(0px);
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
 

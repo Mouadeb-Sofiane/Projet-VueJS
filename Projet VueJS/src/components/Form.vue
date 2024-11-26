@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Button from './Button.vue';
+import HideIcon from '../components/icons/Hide.vue';
+import ShowIcon from '../components/icons/Show.vue';
+
 
 const email = ref('');
 const password = ref('');
+const showPassword = ref(false);
+
 
 function handleSubmit() {
     alert(`Email: ${email.value} | Password: ${password.value}`);
@@ -26,29 +31,32 @@ function handleSubmit() {
 
         <div class="form-group">
             <label for="password" class="form-label">Password</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                class="form-input"
-                v-model="password"
-                required
-            />
+            <div class="password-wrapper">
+                <input
+                    :type="showPassword ? 'text' : 'password'"
+                    id="password"
+                    name="password"
+                    class="form-input"
+                    v-model="password"
+                    required
+                />
+                <button
+                    type="button"
+                    class="toggle-password"
+                    @click="showPassword = !showPassword"
+                     >
+                     <ShowIcon v-if="!showPassword" />
+                     <HideIcon v-else />
+                </button>
+            </div>
         </div>
-
-        <Button type="submit" class="form-button">Connexion</Button>
+        <div class="form-btn">
+            <Button type="submit" class="button -long">Connexion</Button>
+        </div>
     </form>
 </template>
 
-<style lang="scss" scoped>
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: $secondary-color;
-}
-
+<style setup lang="scss">
 
 .form {
     max-width: rem(450px);
@@ -58,8 +66,12 @@ body {
     border-radius: rem(8px);
     box-shadow: 0 rem(4px) rem(6px) rgba(0, 0, 0, 0.1);
 
+    .form-btn {
+        text-align: center;;
+    }
     .form-group {
         margin-bottom: rem(16px);
+        text
 
         .form-label {
             display: block;
@@ -81,21 +93,32 @@ body {
                 outline: none;
             }
         }
+        .password-wrapper {
+            position: relative;
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: rem(12px);
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+
+            svg {
+                width: rem(20px);
+                height: rem(20px);
+            }
+
+            &:hover svg {
+                fill: darken($primary-color, 10%);
+            }
+        }
+      }
     }
 
     .form-button {
-        width: 100%;
-        padding: rem(12px) rem(16px);
-        background-color: $primary-color;
-        color: white;
-        font-size: rem(16px);
-        font-weight: bold;
-        text-align: center;
-        border: none;
-        border-radius: rem(4px);
-        cursor: pointer;
-        transition: background-color 0.3s;
-
+        align-items: center;
         &:hover {
             background-color: darken($primary-color, 10%);
         }
