@@ -71,10 +71,6 @@ const toggleState = () => {
     font-family: $fontTextFamily; 
   }
 
-  &.-outline {
-    background: transparent;
-    color: $primaryColor;
-  }
 }
 </style>
 
