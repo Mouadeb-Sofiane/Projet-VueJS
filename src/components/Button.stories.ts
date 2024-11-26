@@ -21,7 +21,8 @@ type Story = StoryObj<typeof Button>;
  * See https://storybook.js.org/docs/api/csf
  * to learn how to use render functions.
  */
-export const Primary: Story = {
+export const Primary: StoryObj =  {
+
   render: (args) => ({
     components: { Button },
     setup() {
@@ -35,7 +36,7 @@ export const Primary: Story = {
 };
 
 
-export const Outline: Story = {
+export const Outline: StoryObj = {
   render: (args) => ({
     components: { Button },
     setup() {
@@ -49,7 +50,7 @@ export const Outline: Story = {
   },
 };
 
-export const Disable: Story = {
+export const Disable: StoryObj = {
     render: (args) => ({
       components: { Button },
       setup() {
@@ -63,7 +64,7 @@ export const Disable: Story = {
     },
   };
 
-  export const DisablePrimary: Story = {
+  export const DisablePrimary: StoryObj = {
     render: (args) => ({
       components: { Button },
       setup() {
@@ -79,7 +80,7 @@ export const Disable: Story = {
   };
 
 
-  export const SmallBTN: Story = {
+  export const SmallBTN: StoryObj = {
 
     render: (args) => ({
       components: { Button },
@@ -95,7 +96,7 @@ export const Disable: Story = {
     },
   };
 
-  export const Long: Story = {
+  export const Long: StoryObj = {
     render: (args) => ({
       components: { Button },
       setup() {
@@ -108,7 +109,7 @@ export const Disable: Story = {
     },
   };
 
-  export const GetStarted: Story = {
+  export const GetStarted: StoryObj = {
     render: (args) => ({
       components: { Button },
       setup() {

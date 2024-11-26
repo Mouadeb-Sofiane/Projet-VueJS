@@ -16,7 +16,7 @@ const meta: Meta<typeof Toggle> = {
 export default meta;
 type Story = StoryObj<typeof Toggle>;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   render: (args) => ({
     components: { Toggle },
     setup() {
@@ -34,7 +34,7 @@ export const Default: Story = {
 };
 
 
-export const Active: Story = {
+export const Active: StoryObj = {
   render: (args) => ({
     components: { Toggle },
     setup() {
