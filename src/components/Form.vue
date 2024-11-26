@@ -69,16 +69,17 @@ function handleSubmit() {
     .form-btn {
         text-align: center;;
     }
-    .form-group {
-        margin-bottom: rem(16px);
-        text
+        .form-group {
+            margin-bottom: rem(16px);
 
-        .form-label {
-            display: block;
-            margin-bottom: rem(8px);
-            font-size: rem(14px);
-            color: $gray;
+            .form-label {
+                display: block;
+                margin-bottom: rem(8px);
+                font-size: rem(14px);
+                color: $gray;
+            }
         }
+
 
         .form-input {
             width: 92%;
@@ -128,5 +129,5 @@ function handleSubmit() {
             cursor: not-allowed;
         }
     }
-}
+
 </style>

@@ -19,7 +19,7 @@ const meta: Meta<typeof Form> = {
 
 export default meta;
 
-export const Default: StoryObj<typeof Form> = {
+export const Default: StoryObj = {
   render: (args) => ({
     components: { Form },
     setup() {
@@ -38,7 +38,7 @@ export const Default: StoryObj<typeof Form> = {
   },
 };
 
-export const PreEcrit: StoryObj<typeof Form> = {
+export const PreEcrit: StoryObj = {
   render: (args) => ({
     components: { Form },
     setup() {
@@ -57,7 +57,7 @@ export const PreEcrit: StoryObj<typeof Form> = {
   },
 };
 
-export const EmailPasValide: StoryObj<typeof Form> = {
+export const EmailPasValide: StoryObj = {
   render: (args) => ({
     components: { Form },
     setup() {
