@@ -70,6 +70,7 @@ const toggleState = () => {
   .track, .thumb {
     font-family: $fontTextFamily; 
   }
+
 }
 </style>
 

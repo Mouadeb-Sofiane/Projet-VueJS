@@ -32,3 +32,22 @@ export const Default: Story = {
     initialState: false,
   },
 };
+
+
+export const Active: Story = {
+  render: (args) => ({
+    components: { Toggle },
+    setup() {
+      return { args };
+    },
+    template: `
+      <div>
+        <Toggle v-bind="args" />
+      </div>
+    `,
+  }),
+  args: {
+    initialState: true,
+  },
+};
+
