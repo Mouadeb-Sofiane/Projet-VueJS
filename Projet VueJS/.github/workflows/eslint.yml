@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      
+    
     # Changer de repertoire
       - name: go to directory
         run: cd Projet VueJS 
