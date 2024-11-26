@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Toggle from '@/components/Toggle.vue';
+
 </script>
 
 <template>
