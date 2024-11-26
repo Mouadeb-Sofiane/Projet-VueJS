@@ -78,7 +78,10 @@ export const Disable: Story = {
     },
   };
 
-  export const Small: Story = {
+
+  export const Small: Story = 
+  export const SmallBTN: Story = {
+
     render: (args) => ({
       components: { Button },
       setup() {
@@ -87,6 +90,7 @@ export const Disable: Story = {
       template: `<Button v-bind="args">${args.default}</Button>`,
     }),
     args: {
+
       default: 'Connexion',
       variant: 'small'
     },
@@ -119,3 +123,9 @@ export const Disable: Story = {
     },
   };
   
+
+      default: 'Small Btn',
+      variant: 'small',
+    },
+  };
+

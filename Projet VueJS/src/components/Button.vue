@@ -3,7 +3,10 @@ import { defineProps } from 'vue';
 
 defineProps<{
     disabled?: boolean,
+
     variant?: "primary" | "outline" | "disable" | "small" | "long" | "getstarted";
+
+
 }>();
 
 </script>
@@ -14,8 +17,10 @@ defineProps<{
     '-outline' : variant === 'outline',
     '-disabled' : disabled,
     '-small' : variant === 'small',
+
     '-long' : variant === 'long',
     '-getstarted' : variant === 'getstarted'
+
     }">
         <slot></slot>
     </button>
