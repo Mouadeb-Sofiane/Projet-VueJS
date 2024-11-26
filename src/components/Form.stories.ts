@@ -13,11 +13,15 @@ const meta: Meta<typeof Form> = {
       control: 'text',
       description: 'Mot de passe saisi dans le champ.',
     },
-    onSubmit: { action: 'submit', description: 'Action déclenchée lors de la soumission du formulaire.' },
+    onSubmit: {
+      action: 'submit',
+      description: 'Action déclenchée lors de la soumission du formulaire.',
+    },
   },
 };
 
 export default meta;
+
 
 export const Default: StoryObj = {
   render: (args) => ({

@@ -4,6 +4,11 @@ import Button from './Button.vue';
 import HideIcon from '../components/icons/Hide.vue';
 import ShowIcon from '../components/icons/Show.vue';
 
+defineProps<{
+  email: string;
+  password: string;
+  onSubmit?: (event: Event) => void;
+}>();
 
 const email = ref('');
 const password = ref('');
