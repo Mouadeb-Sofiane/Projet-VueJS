@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const isActive = ref(false);
+const Props = defineProps<{
+  initialState: boolean;
+}>();
+
+const isActive = ref(Props.initialState);
 
 const toggleState = () => {
   isActive.value = !isActive.value;
