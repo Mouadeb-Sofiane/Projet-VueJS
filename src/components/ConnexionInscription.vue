@@ -61,9 +61,7 @@ function getText()  {
                 '-inscription': variant === 'inscription'}">
 
     <div class="home__content">
-      <div class="home__image">
-        <img  :src="getImage()" alt="Illustration" />
-      </div>
+      
 
       <div class="home__form">
         <h1 :class="{'title': true,
@@ -88,11 +86,16 @@ function getText()  {
   flex-direction: column;
 
   &.-connexion{
+    background: url('../images/Build-Good-Habits.jpg');
+    background-size: cover;
+    padding-top: 38px;
 
   } 
 
   &.-inscription{
-
+    background: url('../images/Old-New-Habits.jpg');
+    background-size: cover;
+    padding-top: 38px;
   }
 
   &__content {
@@ -109,12 +112,6 @@ function getText()  {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: url('../images/Old-New-Habits.jpg')
-    no-repeat center center;
-    background-size: cover;
-
-
-    
   }
 
   &__image {
@@ -141,7 +138,11 @@ function getText()  {
 
 .title {
   text-align: center;
-  color: $primaryColor;
+  color: $black;
+
+  &.-inscription{
+    color: $white;
+  }
 }
 
 .subtitle {

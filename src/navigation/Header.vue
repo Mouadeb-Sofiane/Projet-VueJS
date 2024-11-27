@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import User from "../components/icons/User.vue";
 
 const isOpen = ref(false);
 
@@ -33,17 +34,18 @@ const closeMobileMenu = () => {
         <RouterLink to="/" class="header__menu-item">Accueil</RouterLink>
         <RouterLink to="/about" class="header__menu-item">À propos</RouterLink>
         <RouterLink to="/habitude" class="header__menu-item">Mes Habitudes</RouterLink>
-        <RouterLink to="/connexion" class="header__menu-item">Connexion</RouterLink>
-        <RouterLink to="/inscription" class="header__menu-item">Inscription</RouterLink>
+        <RouterLink to="/connexion" class="header__menu-item">
+          <User />
+        </RouterLink>
       </nav>
 
       <div class="header__mobile-menu" :class="{ 'is-open': isOpen }">
         <RouterLink to="/" class="header__menu-item" @click="closeMobileMenu">Accueil</RouterLink>
         <RouterLink to="/about" class="header__menu-item" @click="closeMobileMenu">À propos</RouterLink>
         <RouterLink to="/habitude" class="header__menu-item" @click="closeMobileMenu">Mes Habitudes</RouterLink>
-        <RouterLink to="/connexion" class="header__menu-item" @click="closeMobileMenu">Connexion</RouterLink>
-        <RouterLink to="/inscription" class="header__menu-item" @click="closeMobileMenu">Inscription</RouterLink>
-
+        <RouterLink to="/connexion" class="header__menu-item" @click="closeMobileMenu">
+          <User />
+        </RouterLink>
       </div>
     </div>
   </header>
