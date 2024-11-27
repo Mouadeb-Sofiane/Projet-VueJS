@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import ConnexionInscription from '@/components/ConnexionInscription.vue';
 </script>
 
 <template>
-    <h1>Connexion</h1>
+    <ConnexionInscription variant="connexion" />
 </template>
-

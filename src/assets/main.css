@@ -1,7 +1,6 @@
 @import './base.css';
 
 #app {
-  margin-top: 7%;
   font-weight: normal;
 }
 
@@ -9,10 +8,6 @@ body {
   background-color: #ffffff;
 }
 
-a,
-.green {
-  text-decoration: none;
-  padding: 3px;
-}
+
 
 

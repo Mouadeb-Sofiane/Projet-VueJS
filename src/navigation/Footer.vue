@@ -19,7 +19,7 @@
               <RouterLink to="/" class="footer__column-text">Accueil</RouterLink>
             </li>
             <li>
-              <RouterLink to="/habitude" class="footer__column-text">Mes habitude</RouterLink>
+              <RouterLink to="/habitude" class="footer__column-text">Habitude</RouterLink>
             </li>
             <li>
               <RouterLink to="/connexion" class="footer__column-text">Inscription</RouterLink>

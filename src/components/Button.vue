@@ -24,8 +24,8 @@ defineProps<{
     }">
         <slot></slot>
     </button>
-
 </template>
+
 
 <style lang="scss">
 .button {
@@ -48,14 +48,14 @@ defineProps<{
     }
     &.-disabled {
       background: transparent;
-      color: $gray400;
-      border-color: $gray100;
+      color: $grey400;
+      border-color: $grey100;
     }
   }
   &.-disabled {
-    background: $gray100;
-    border-color: $gray100;
-    color: $gray400;
+    background: $grey100;
+    border-color: $grey100;
+    color: $grey400;
     cursor: not-allowed;
   }
 
@@ -82,7 +82,7 @@ defineProps<{
 }
 
 .cercle{
-  background: $gray100;
+  background: $grey100;
   border-radius:50%;
   width:15px;
   height:15px;
