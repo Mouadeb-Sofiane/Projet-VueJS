@@ -101,7 +101,7 @@ const closeMobileMenu = () => {
     padding: rem(10px) rem(15px);
 
     &:hover {
-      background: $gray800;
+      background: $grey800;
       border-radius: rem(5px);
     }
   }
@@ -134,7 +134,7 @@ const closeMobileMenu = () => {
     border-radius: rem(5px);
 
     &:hover {
-      background: $gray800;
+      background: $grey800;
     }
   }
 }
