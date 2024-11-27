@@ -88,14 +88,13 @@ function getText()  {
   &.-connexion{
     background: url('../images/Build-Good-Habits.jpg');
     background-size: cover;
-    padding-top: 38px;
-
+    padding-top: rem(38px);
   } 
 
   &.-inscription{
     background: url('../images/Old-New-Habits.jpg');
     background-size: cover;
-    padding-top: 38px;
+    padding-top: rem(38px);
   }
 
   &__content {
@@ -133,8 +132,6 @@ function getText()  {
   }
 
 }
-  
-  
 
 .title {
   text-align: center;
