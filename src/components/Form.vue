@@ -9,6 +9,9 @@ const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 
+defineProps <{
+    title : string;     
+}>();
 
 function handleSubmit() {
     alert(`Email: ${email.value} | Password: ${password.value}`);
@@ -17,6 +20,9 @@ function handleSubmit() {
 
 <template>
     <form @submit.prevent="handleSubmit" class="form">
+        <div>
+            <h1 class="form-title">{{ title }}</h1>
+        </div>
         <div class="form-group">
             <label for="email" class="form-label">Email</label>
             <input
@@ -51,7 +57,7 @@ function handleSubmit() {
             </div>
         </div>
         <div class="form-btn">
-            <Button type="submit" class="button -long">Connexion</Button>
+            <Button type="submit" class="button -long">{{ title }}</Button>
         </div>
     </form>
 </template>
@@ -66,6 +72,11 @@ function handleSubmit() {
     border-radius: rem(8px);
     box-shadow: 0 rem(4px) rem(6px) rgba(0, 0, 0, 0.1);
 
+    .form-title {
+        text-align: center;
+        color: $black;
+    }
+    
     .form-btn {
         text-align: center;;
     }
@@ -76,7 +87,7 @@ function handleSubmit() {
                 display: block;
                 margin-bottom: rem(8px);
                 font-size: rem(14px);
-                color: $gray;
+                color: $grey;
             }
         }
 
@@ -85,12 +96,12 @@ function handleSubmit() {
             width: 92%;
             padding: rem(12px) rem(16px);
             font-size: rem(16px);
-            border: 1px solid $gray;
+            border: 1px solid $grey;
             border-radius: rem(4px);
             transition: border-color 0.3s;
 
             &:focus {
-                border-color: $primary-color;
+                border-color: $primaryColor;
                 outline: none;
             }
         }
@@ -112,7 +123,7 @@ function handleSubmit() {
             }
 
             &:hover svg {
-                fill: darken($primary-color, 10%);
+                fill: darken($primaryColor, 10%);
             }
         }
       }
@@ -121,11 +132,11 @@ function handleSubmit() {
     .form-button {
         align-items: center;
         &:hover {
-            background-color: darken($primary-color, 10%);
+            background-color: darken($primaryColor, 10%);
         }
 
         &:disabled {
-            background-color: lighten($primary-color, 20%);
+            background-color: lighten($primaryColor, 20%);
             cursor: not-allowed;
         }
     }

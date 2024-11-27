@@ -3,5 +3,5 @@ import ConnexionInscription from '@/components/ConnexionInscription.vue';
 </script>
 
 <template>
-    <ConnexionInscription variant="connexion" />
+    <ConnexionInscription variant="inscription" />
 </template>

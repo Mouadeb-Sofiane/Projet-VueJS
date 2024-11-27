@@ -34,6 +34,7 @@ const closeMobileMenu = () => {
         <RouterLink to="/about" class="header__menu-item">À propos</RouterLink>
         <RouterLink to="/habitude" class="header__menu-item">Mes Habitudes</RouterLink>
         <RouterLink to="/connexion" class="header__menu-item">Connexion</RouterLink>
+        <RouterLink to="/inscription" class="header__menu-item">Inscription</RouterLink>
       </nav>
 
       <div class="header__mobile-menu" :class="{ 'is-open': isOpen }">
@@ -41,6 +42,8 @@ const closeMobileMenu = () => {
         <RouterLink to="/about" class="header__menu-item" @click="closeMobileMenu">À propos</RouterLink>
         <RouterLink to="/habitude" class="header__menu-item" @click="closeMobileMenu">Mes Habitudes</RouterLink>
         <RouterLink to="/connexion" class="header__menu-item" @click="closeMobileMenu">Connexion</RouterLink>
+        <RouterLink to="/inscription" class="header__menu-item" @click="closeMobileMenu">Inscription</RouterLink>
+
       </div>
     </div>
   </header>

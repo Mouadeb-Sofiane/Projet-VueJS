@@ -29,7 +29,7 @@ defineProps<{
 .c-item {
     $self: &;
     padding: rem(16px);
-    border: 1px solid $gray100;
+    border: 1px solid $grey100;
     
     @each $color, $value in $colors {
         &.-#{$color} #{$self}__image {
@@ -50,11 +50,11 @@ defineProps<{
 
     &__title {
         font-size: rem(24px);
-        color: $gray800;
+        color: $grey800;
     }
 
     &__image {
-        border-bottom: 4px solid $gray400;
+        border-bottom: 4px solid $grey400;
         max-width: 100%;
     }
 
