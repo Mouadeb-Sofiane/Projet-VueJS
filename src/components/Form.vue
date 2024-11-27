@@ -5,7 +5,6 @@ import HideIcon from '../components/icons/Hide.vue';
 import ShowIcon from '../components/icons/Show.vue';
 
 
-
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
