@@ -7,11 +7,11 @@ const props = defineProps<{
 
 function getImage() {
   if (props.variant === 'inscription') {
-    return ('#');
+    return ('/images/Build-Good-Habits.jpg');
   }
 
   else if (props.variant === 'connexion') {
-    return ('/images/Logo-SM.svg');
+    return ('/images/Old-New-Habits.jpg');
   }
 
 }
@@ -109,7 +109,7 @@ function getText()  {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: url('#')
+    background: url('../images/Old-New-Habits.jpg')
     no-repeat center center;
     background-size: cover;
 

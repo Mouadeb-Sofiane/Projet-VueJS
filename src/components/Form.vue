@@ -21,43 +21,43 @@ function handleSubmit() {
 <template>
     <form @submit.prevent="handleSubmit" class="form">
         <div>
-            <h1 class="form-title">{{ title }}</h1>
+            <h1 class="form__title">{{ title }}</h1>
         </div>
-        <div class="form-group">
-            <label for="email" class="form-label">Email</label>
+        <div class="form__group">
+            <label for="email" class="form__label">Email</label>
             <input
                 type="email"
                 id="email"
                 name="email"
-                class="form-input"
+                class="form__input"
                 v-model="email"
                 required
             />
         </div>
 
-        <div class="form-group">
-            <label for="password" class="form-label">Password</label>
-            <div class="password-wrapper">
+        <div class="form__group">
+            <label for="password" class="form__label">Password</label>
+            <div class="form__password-wrapper">
                 <input
                     :type="showPassword ? 'text' : 'password'"
                     id="password"
                     name="password"
-                    class="form-input"
+                    class="form__input"
                     v-model="password"
                     required
                 />
                 <button
                     type="button"
-                    class="toggle-password"
+                    class="form__toggle-password"
                     @click="showPassword = !showPassword"
                      >
-                     <ShowIcon v-if="!showPassword" />
-                     <HideIcon v-else />
+                     <ShowIcon class="form__icon" v-if="!showPassword" />
+                     <HideIcon class="form__icon" v-else />
                 </button>
             </div>
         </div>
-        <div class="form-btn">
-            <Button type="submit" class="button -long">{{ title }}</Button>
+        <div class="form__btn">
+            <Button type="submit" class="form-button -long">{{ title }}</Button>
         </div>
     </form>
 </template>
@@ -66,37 +66,37 @@ function handleSubmit() {
 
 .form {
     max-width: rem(450px);
-    margin: rem(50px) auto;
-    padding: rem(20px);
+    margin: 1rem auto;
+    padding: 2.5rem;
     background: white;
+    color: $black;
     border-radius: rem(8px);
     box-shadow: 0 rem(4px) rem(6px) rgba(0, 0, 0, 0.1);
 
-    .form-title {
+    &__title {
         text-align: center;
         color: $black;
     }
     
-    .form-btn {
+    &__btn {
         text-align: center;;
     }
-        .form-group {
+        &__group {
             margin-bottom: rem(16px);
 
-            .form-label {
+            &__label {
                 display: block;
                 margin-bottom: rem(8px);
                 font-size: rem(14px);
-                color: $grey;
+                color: $black;
             }
         }
 
 
-        .form-input {
-            width: 92%;
+        &__input {
+            width: 100%;
             padding: rem(12px) rem(16px);
             font-size: rem(16px);
-            border: 1px solid $grey;
             border-radius: rem(4px);
             transition: border-color 0.3s;
 
@@ -105,26 +105,17 @@ function handleSubmit() {
                 outline: none;
             }
         }
-        .password-wrapper {
-            position: relative;
+        &__password-wrapper {
+            display: flex;
 
-        .toggle-password {
+        &__toggle-password {
             position: absolute;
             top: 50%;
             right: rem(12px);
             transform: translateY(-50%);
-            background: none;
+            border-radius: rem(4px);
+            background: $white;
             border: none;
-            cursor: pointer;
-
-            svg {
-                width: rem(20px);
-                height: rem(20px);
-            }
-
-            &:hover svg {
-                fill: darken($primaryColor, 10%);
-            }
         }
       }
     }
