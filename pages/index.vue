@@ -1,6 +1,7 @@
 <template>
-    <div class="margin"></div>
-    <h1 >Home</h1>
+    <div class="margin">
+    <h1>Home</h1>
+    </div>
 </template>
 
 <style setup lang="scss">
