@@ -6,11 +6,11 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*"
-, "../vite.config.ts"  ],
+, "vite.config.ts"  ],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "tsBuildInfoFile": "vuejs/node_modules/.tmp/tsconfig.node.tsbuildinfo",
 
     "module": "ESNext",
     "moduleResolution": "Bundler",

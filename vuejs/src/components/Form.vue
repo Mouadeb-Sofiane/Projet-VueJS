@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Button from './Button.vue';
-import HideIcon from '../components/icons/Hide.vue';
-import ShowIcon from '../components/icons/Show.vue';
+import HideIcon from './icons/Hide.vue';
+import ShowIcon from './icons/Show.vue';
 
 const email = ref('');
 const password = ref('');
