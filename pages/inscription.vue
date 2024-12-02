@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <ConnexionInscription variant="connexion" />
+        <ConnexionInscription variant="inscription" />
     </div>
 </template>
 

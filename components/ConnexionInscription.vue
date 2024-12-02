@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Form from './Form.vue';
 
 const props = defineProps<{
     variant?: "inscription" | "connexion";
@@ -47,25 +46,23 @@ function getText()  {
 
 <template>
   <main
-:class="{'home': true,
+    :class="{'home': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">
 
     <div class="home__content">
-      
-
       <div class="home__form">
         <h1
-:class="{'title': true,
+          :class="{'title': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">
           {{ getText() }}
         </h1>
         <Form :title="getTitreBouton()"/>
         <p
-:class="{'redirect': true,
+          :class="{'redirect': true,
                 '-connexion': variant === 'connexion',
-                '-inscription': variant === 'inscription'}">{{ getRedirectText() }} <RouterLink :to="getRedirectLink()" class="home__link">ici</RouterLink>.
+                '-inscription': variant === 'inscription'}">{{ getRedirectText() }} <NuxtLink :to="getRedirectLink()" class="home__link">ici</NuxtLink>.
         </p>
       </div>
     </div>
