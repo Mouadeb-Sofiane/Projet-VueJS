@@ -5,16 +5,6 @@ const props = defineProps<{
     variant?: "inscription" | "connexion";
 }>();
 
-function getImage() {
-  if (props.variant === 'inscription') {
-    return ('/images/Build-Good-Habits.jpg');
-  }
-
-  else if (props.variant === 'connexion') {
-    return ('/images/Old-New-Habits.jpg');
-  }
-
-}
 
 function getTitreBouton() {
   if (props.variant === 'inscription') {
@@ -56,7 +46,8 @@ function getText()  {
 </script>
 
 <template>
-  <main :class="{'home': true,
+  <main
+:class="{'home': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">
 
@@ -64,13 +55,15 @@ function getText()  {
       
 
       <div class="home__form">
-        <h1 :class="{'title': true,
+        <h1
+:class="{'title': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">
           {{ getText() }}
         </h1>
         <Form :title="getTitreBouton()"/>
-        <p :class="{'redirect': true,
+        <p
+:class="{'redirect': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">{{ getRedirectText() }} <RouterLink :to="getRedirectLink()" class="home__link">ici</RouterLink>.
         </p>

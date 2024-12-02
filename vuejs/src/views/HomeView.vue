@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 
 const usagePercentage = ref(85); 
 </script>
@@ -24,19 +23,19 @@ const usagePercentage = ref(85);
         <h2 class="home__section-title">Nos clients</h2>
           <div class="home__progress">
             <svg class="home__progress-circle" viewBox="0 0 36 36">
-            <circle class="home__progress-bg" cx="18" cy="18" r="16"></circle>
+            <circle class="home__progress-bg" cx="18" cy="18" r="16"/>
               <circle
                 class="home__progress-value"
                 cx="18"
                 cy="18"
                 r="16"
                 :style="{ strokeDashoffset: (100 - usagePercentage) * 100 / 100 }"
-              ></circle>
+              />
             </svg>
             <span class="home__progress-text">{{ usagePercentage }}%</span>
           </div>
             <p class="home__section-text">
-              Actuellement, <span class="home__highlight">{{ usagePercentage }}%</span> de nos clients utilisent notre plateforme quotidiennement. Rejoignez-les pour améliorer vos habitudes dès aujourd'hui !
+              Actuellement, <span class="home__highlight">{{ usagePercentage }}%</span> de nos clients utilisent notre plateforme quotidiennement. Rejoignez-les pour améliorer vos habitudes dès aujourd'hui !
             </p>
       </section>
 

@@ -18,15 +18,15 @@ const closeMobileMenu = () => {
   <header class="header">
     <div class="header__container">
       <RouterLink to="/" class="header__logo">
-        <img src="../images/Logo-SM.svg" alt="logo du site" />
+        <img src="../images/Logo-SM.svg" alt="logo du site" >
       </RouterLink>
 
-      <button @click="toggleMobileMenu" class="header__menu-button md:hidden">
+      <button class="header__menu-button md:hidden" @click="toggleMobileMenu">
         <svg v-if="!isOpen" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 9h14a1 1 0 110 2H3a1 1 0 110-2zm0-4h14a1 1 0 110 2H3a1 1 0 110-2zm0 8h14a1 1 0 110 2H3a1 1 0 110-2z" clip-rule="evenodd"></path>
+          <path fill-rule="evenodd" d="M3 9h14a1 1 0 110 2H3a1 1 0 110-2zm0-4h14a1 1 0 110 2H3a1 1 0 110-2zm0 8h14a1 1 0 110 2H3a1 1 0 110-2z" clip-rule="evenodd"/>
         </svg>
         <svg v-else viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M6 6a.75.75 0 011.06 0L10 8.94l2.47-2.47a.75.75 0 111.06 1.06L11.06 10l2.47 2.47a.75.75 0 11-1.06 1.06L10 11.06l-2.47 2.47a.75.75 0 01-1.06-1.06L8.94 10 6.47 7.53A.75.75 0 016 6z" clip-rule="evenodd"></path>
+          <path fill-rule="evenodd" d="M6 6a.75.75 0 011.06 0L10 8.94l2.47-2.47a.75.75 0 111.06 1.06L11.06 10l2.47 2.47a.75.75 0 11-1.06 1.06L10 11.06l-2.47 2.47a.75.75 0 01-1.06-1.06L8.94 10 6.47 7.53A.75.75 0 016 6z" clip-rule="evenodd"/>
         </svg>
       </button>
 

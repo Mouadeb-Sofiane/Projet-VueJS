@@ -18,33 +18,33 @@ function handleSubmit() {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="form">
+  <form class="form" @submit.prevent="handleSubmit">
     <div>
       <h1 class="form__title">{{ title }}</h1>
     </div>
     <div class="form__group">
       <label for="email" class="form__label">Email</label>
       <input
-        type="email"
         id="email"
+        v-model="email"
+        type="email"
         name="email"
         class="form__input"
-        v-model="email"
         required
-      />
+      >
     </div>
 
     <div class="form__group">
       <label for="password" class="form__label">Password</label>
       <div class="form__password-wrapper">
         <input
-          :type="showPassword ? 'text' : 'password'"
           id="password"
+          v-model="password"
+          :type="showPassword ? 'text' : 'password'"
           name="password"
           class="form__input"
-          v-model="password"
           required
-        />
+        >
         <button
           type="button"
           class="form__toggle-password"

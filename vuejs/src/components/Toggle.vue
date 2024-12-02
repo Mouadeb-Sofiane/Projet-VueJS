@@ -19,8 +19,8 @@ const toggleState = () => {
         :class="['toggle', isActive ? 'true' : 'false']"
         @click="toggleState"
       >
-        <div class="track"></div>
-        <div class="thumb"></div>
+        <div class="track"/>
+        <div class="thumb"/>
       </div>
       
       <p>{{ isActive ? 'True' : 'False' }}</p>
