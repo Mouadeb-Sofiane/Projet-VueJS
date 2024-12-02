@@ -5,6 +5,13 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
 
   css : ['~/assets/scss/main.scss'],
+
+  components : [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
+  ],
   
 vite: {
   css: {

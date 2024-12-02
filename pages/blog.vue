@@ -1,6 +1,7 @@
 <template>
     <div class="margin">
         <h1>Blog</h1>
+        
     </div>
     
 </template>

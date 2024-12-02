@@ -4,7 +4,7 @@
 
 <template>
     <div class="margin">
-        Page Connexion
+        <Form />
     </div>
 </template>
 
