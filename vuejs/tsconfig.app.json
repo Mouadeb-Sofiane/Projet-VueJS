@@ -1,0 +1,14 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["../env.d.ts", "vuejs/src/**/*", "vuejs/src/**/*.vue"],
+  "exclude": ["vuejs/src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "vuejs/node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["vuejs/src/*"]
+    }
+  }
+}
