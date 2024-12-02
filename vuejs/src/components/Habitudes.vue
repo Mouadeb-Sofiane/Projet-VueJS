@@ -22,9 +22,9 @@ const habits = [
 <template>
     <div class="habitude-cards">
       <div
-        class="habitude-card"
         v-for="(habit, index) in habits"
         :key="index"
+        class="habitude-card"
         :style="{ background: habit.gradient }"
       >
         <div class="habitude-card__header">
