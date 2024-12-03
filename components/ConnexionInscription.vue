@@ -14,6 +14,9 @@ function getTitreBouton() {
     return ('Connexion');
   }
 
+  else {
+    return ('Connexion');
+  }
 }
 
 function getText()  {
