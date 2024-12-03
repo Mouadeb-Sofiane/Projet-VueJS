@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
-const props = defineProps({ error: Object as () => NuxtError });
+const props = defineProps({ 
+    error: Object as () => NuxtError 
+});
 
 const handleError = () => clearError({ redirect: "/" });
 </script>
@@ -12,7 +14,7 @@ const handleError = () => clearError({ redirect: "/" });
         <p>Ma page d'erreur {{ error.statusCode }} personnalisée.</p>
         <p>Message : {{ error.statusMessage }}</p>
         <Button>
-            <NuxtLink to="/">Retour à l'accueil</NuxtLink>
+            <NuxtLink @handleClick="handleError">Retour à l'accueil</NuxtLink>
         </Button>
     </div>
 </template>
