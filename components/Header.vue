@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import User from "../components/icons/User.vue";
+
 
 const isOpen = ref(false);
 

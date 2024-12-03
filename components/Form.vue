@@ -45,9 +45,9 @@ function handleSubmit() {
           class="form__toggle-password"
           @click="showPassword = !showPassword"
         >
-          <ShowIcon v-if="!showPassword" />
-          <HideIcon v-else />
-        </button>
+          <Show v-if="!showPassword" />
+          <Hide v-else />
+      </button>
       </div>
     </div>
     <div class="form__btn">
