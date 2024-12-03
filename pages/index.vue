@@ -1,7 +1,7 @@
 <template>
     <div class="margin">
         <h1>Home</h1>
-        <Button>Button</Button>
+        <Button><a href="/blog">Blog</a></Button>
     </div>
 </template>
 
