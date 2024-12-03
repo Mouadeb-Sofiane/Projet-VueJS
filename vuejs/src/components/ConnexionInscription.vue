@@ -14,7 +14,6 @@ function getTitreBouton() {
   else if (props.variant === 'connexion') {
     return ('Connexion');
   }
-
 }
 
 function getText()  {
@@ -56,14 +55,14 @@ function getText()  {
 
       <div class="home__form">
         <h1
-:class="{'title': true,
+        :class="{'title': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">
           {{ getText() }}
         </h1>
         <Form :title="getTitreBouton()"/>
         <p
-:class="{'redirect': true,
+        :class="{'redirect': true,
                 '-connexion': variant === 'connexion',
                 '-inscription': variant === 'inscription'}">{{ getRedirectText() }} <RouterLink :to="getRedirectLink()" class="home__link">ici</RouterLink>.
         </p>
