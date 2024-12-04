@@ -3,27 +3,52 @@ import type { SanityDocument } from "@sanity/client";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
 
-const POSTS_QUERY = groq`*[
+const filter = ref ('');
+
+const page = ref (1);
+const perPage = 3;
+
+const paginationStart = computed(() => (page.value - 1) * perPage);
+const paginationEnd = computed(() => page.value * perPage);
+
+const TotalPage = computed(() => 
+  Math.ceil((postCount.value || 0) / perPage));
+
+
+const { data : postCount } = await useSanityQuery<number>(groq`count(*[
   _type == "post"
   && defined(slug.current)
   && ($filter == '' || $filter in (categories[]->slug.current))   
 ]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
 
+  && ($filter == '' || $filter in (categories[]->slug.current))
+])`,{filter});
+
+
+const POSTS_QUERY = groq`*[
+  _type == "post"
+  && defined(slug.current)
+  && ($filter == '' || $filter in (categories[]->slug.current))   
+]|order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
 
 const { projectId, dataset } = useSanity().client.config();
+const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter, start: paginationStart, end: paginationEnd});
 
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null
 
+
 const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
     _type == "category"
     && defined(slug.current)]`)
 
 
+
 const filter = ref ('');
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter});
+
 
 function onCategoryClick(category: SanityDocument) {
     if (filter.value === category.slug.current) {
@@ -31,6 +56,7 @@ function onCategoryClick(category: SanityDocument) {
     } else {
         filter.value = category.slug.current
     }
+
 }
 
 const page = ref(1);
@@ -38,12 +64,27 @@ const page = ref(1);
 function onPageClick(page: number) {
     page.value = index;
 }
+=======
+    page.value = 1
+}
+
+function onPageClick(index: number) {
+    page.value = index;
+}
+
+
 </script>
 
 <template>
     <div class="margin blog">
       <h1 class="blog__title">Blog</h1>
+
       <div>
+
+        <div v-for="n in TotalPage" :key="n" @click="onPageClick(n)">
+            Page {{ n }}
+        </div>
+
         <div>
             filtre : {{ filter }}
             <div>
@@ -51,6 +92,7 @@ function onPageClick(page: number) {
                     <NuxtLink class="blog__category"  @click="onCategoryClick(category)">
                         {{ category.title }}
                     </NuxtLink>
+
                 </Button>
                 
             </div>
@@ -68,6 +110,25 @@ function onPageClick(page: number) {
                 {{ category.title }}
                 </Button>
             </div>
+
+                </Button>
+                
+            </div>
+        </div>
+      </div>
+      <div class="blog__post-list">
+        <div class="blog__post" v-for="(post, index) in posts" :key="index">
+
+            <div class="blog__categories">
+                <Button
+                    class="blog__categories__item"
+                    v-for="(category, Cindex) in post.categories"
+                    :key="Cindex"
+                >
+                {{ category.title }}
+                </Button>
+            </div>
+
             <img class="blog__image" v-if="post.image" :src="urlFor(post.image)?.url()" alt="Image du post" />
     
             <Button>
@@ -85,6 +146,9 @@ function onPageClick(page: number) {
             </div>
         </div>
     </div>
+
+      </div>
+    
 </template>
   
 <style setup lang="scss">
@@ -164,6 +228,7 @@ function onPageClick(page: number) {
   .blog__post-title {
     font-size: 1.2rem;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -180,6 +245,25 @@ function onPageClick(page: number) {
     font-size: 1rem;
   }
 }
+
+
+}
+
+@media (max-width: 768px) {
+  .blog__post-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 15px;
+  }
+
+  .blog__post {
+    padding: 15px;
+  }
+
+  .blog__post-title {
+    font-size: 1rem;
+  }
+}
+
 
 @media (max-width: 480px) {
   .blog__post-list {
