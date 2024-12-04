@@ -1,197 +1,233 @@
 <script setup lang="ts">
+// Imports nécessaires
 import type { SanityDocument } from "@sanity/client";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-  && ($filter == '' || $filter in (categories[]->slug.current))   
-]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
+// Configuration de la page
+definePageMeta({ layout: "minimal" });
 
+// === Données Réactives ===
+const filter = ref(""); // Filtre actif (catégorie sélectionnée)
+const page = ref(1); // Page actuelle
+const perPage = 3; // Nombre d'éléments par page
 
+// === Calculs Dérivés ===
+const paginationStart = computed(() => (page.value - 1) * perPage);
+const paginationEnd = computed(() => page.value * perPage);
+
+// === Récupération des Catégories ===
+const { data: categories } = await useSanityQuery<SanityDocument[]>(
+  groq`*[ _type == "category" && defined(slug.current) ]`
+);
+
+// === Compte des Posts ===
+const { data: postsCount } = await useSanityQuery<number>(
+  groq`count(*[
+    _type == "post" 
+    && defined(slug.current) 
+    && ($filter == '' || $filter in (categories[]->slug.current))
+  ])`,
+  { filter }
+);
+
+// === Calcul des Pages Totales ===
+const totalPages = computed(() =>
+  Math.ceil((postsCount.value || 0) / perPage)
+);
+
+// === Récupération des Posts (Filtrés et Paginés) ===
+const { data: posts } = await useSanityQuery<SanityDocument[]>(
+  groq`*[ 
+    _type == "post" 
+    && defined(slug.current) 
+    && ($filter == '' || $filter in (categories[]->slug.current))
+  ]|order(publishedAt desc)[$start...$end]{
+    _id, image, title, "categories": categories[]->{title, slug}, slug, publishedAt
+  }`,
+  { filter: filter, start: paginationStart, end: paginationEnd }
+);
+
+// === Gestion des Images ===
 const { projectId, dataset } = useSanity().client.config();
-
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null
+    : null;
 
-const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
-    _type == "category"
-    && defined(slug.current)]`)
-
-
-const filter = ref ('');
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter});
-
-function onCategoryClick(category: SanityDocument) {
-    if (filter.value === category.slug.current) {
-        filter.value = '';
-    } else {
-        filter.value = category.slug.current
-    }
+// === Méthodes ===
+/** Gestion du clic sur une catégorie */
+function onCategoriesClick(categorie: SanityDocument) {
+  filter.value =
+    filter.value === categorie.slug.current ? "" : categorie.slug.current;
+  page.value = 1; // Réinitialise la page lors d'un changement de filtre
 }
 
-const page = ref(1);
-
-function onPageClick(page: number) {
-    page.value = index;
+/** Gestion du clic sur une page de pagination */
+function onPageClick(index: number) {
+  page.value = index;
 }
 </script>
-
 <template>
-    <div class="margin blog">
-      <h1 class="blog__title">Blog</h1>
-      <div>
-        <div>
-            filtre : {{ filter }}
-            <div>
-                <Button class="blog__filter" v-for="(category, index) in categories" :key="index" >
-                    <NuxtLink class="blog__category"  @click="onCategoryClick(category)">
-                        {{ category.title }}
-                    </NuxtLink>
-                </Button>
-                
-            </div>
-        </div>
-      </div>
-      <div class="blog__post-list">
-        <div class="blog__post" v-for="(post, index) in posts" :key="index">
+  <div class="l-blog">
+    <!-- Titre -->
+    <h1>Blog</h1>
 
-            <div class="blog__categories">
-                <Button
-                    class="blog__categories__item"
-                    v-for="(category, Cindex) in post.categories"
-                    :key="Cindex"
-                >
-                {{ category.title }}
-                </Button>
-            </div>
-            <img class="blog__image" v-if="post.image" :src="urlFor(post.image)?.url()" alt="Image du post" />
-    
-            <Button>
-                <NuxtLink class="blog__post-title" :to="`/blog/${post.slug.current}`">
-                    {{ post.title }}
-                </NuxtLink>
-            </Button>
-        </div>
-        
+    <!-- Pagination -->
+    <div class="p-blog_pagination">
+      <div
+        v-for="n in totalPages"
+        :key="n"
+        class="pagination__item"
+        :class="{ active: n === page }"
+        @click="onPageClick(n)"
+      >
+        Page {{ n }}
       </div>
-      <div>
-            On est sur la page {{ page }}
-            <div v-for ="n in 3" :key="n" @click="onPageClick(n)">
-                Page {{ n }}
-            </div>
-        </div>
     </div>
+
+    <!-- Filtres par Catégorie -->
+    <div class="p-blog_filters">
+      <h2>Filtres</h2>
+      <div
+        v-for="(categorie, index) in categories"
+        :key="index"
+        class="blog__filter"
+      >
+        <button
+          :class="{ active: filter === categorie.slug.current }"
+          @click="onCategoriesClick(categorie)"
+        >
+          {{ categorie.title }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Liste des Posts -->
+    <ul v-if="posts && posts.length" class="p-blog_list">
+      <li
+        v-for="(post, index) in posts"
+        :key="index"
+        class="blog__item"
+      >
+        <div class="blog__categories">
+          <span v-for="(categorie, i) in post.categories" :key="i">
+            {{ categorie.title }}
+          </span>
+        </div>
+        <h3>
+          <NuxtLink :to="`/blog/${post.slug.current}`">
+            {{ post.title }}
+          </NuxtLink>
+        </h3>
+        <img
+          v-if="post.image"
+          :src="urlFor(post.image)?.url()"
+          alt="Image du post"
+        />
+      </li>
+    </ul>
+
+    <!-- Message Aucun Résultat -->
+    <p v-else>Aucun résultat trouvé.</p>
+  </div>
 </template>
-  
+
 <style setup lang="scss">
-.margin {
-  margin-top: 70px;
-}
-
-.blog {
-  &__post-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px;
-  }
-
-  &__post {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    padding: 20px;
-    border-radius: 8px;
-    transition: transform 0.3s;
-
-    &:hover {
-      transform: translateY(-5px);
+.l-blog {
+  .p-blog_pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    .pagination__item {
+      cursor: pointer;
+      &.active {
+        font-weight: bold;
+      }
     }
   }
 
-  &__post-title {
-    font-size: 1.5rem;
-    color: white;
-    margin-bottom: 10px;
-    text-decoration: none;
-  }
-
-  &__categories {
+  .p-blog_filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-
-    &__item {
-      background-color: #0070f3;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.9rem;
+    gap: 1rem;
+    padding: 1rem 0;
+    .blog__filter {
+      button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd; 
+        cursor: pointer;
+        &.active {
+          background-color: #333;
+          color: #fff;
+        }
+      }
     }
   }
 
-  &__image {
-    max-width: rem(400px); 
-    height: rem(250px);
-    border-radius: 8px;
-    margin-top: 10px;
-    object-fit: cover; 
-  }
+  .p-blog_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; // Permet de passer à la ligne automatiquement si nécessaire
+    gap: 1rem; // Espace entre les cartes
+    justify-content: space-between; // Égalise les espaces
 
-  &__filter {
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #e0e0e0;
-    color : black;
-    margin-right: 10px;
-    border: none;
+    .blog__item {
+      flex: 1 1 calc(33.33% - 1rem); // Largeur calculée pour 3 cartes par ligne avec espace
+      max-width: calc(33.33% - 1rem); // Limite la largeur des cartes
+      box-sizing: border-box; // Inclut padding et border dans les dimensions
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
 
-    &:hover {
-      background-color: #626060;
-      color : white;
+      h3 {  
+        margin: 0;
+        a {
+          text-decoration: none;  
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        margin-top: 1rem;
+      }
+
+      .blog__categories {
+        margin-bottom: 0.5rem;
+        span {
+          margin-right: 0.5rem;
+        }
+      }
     }
   }
 }
 
-@media (max-width: 1024px) {
-  .blog__post-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .blog__post-title {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .blog__post-list {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    gap: 15px;
-  }
-
-  .blog__post {
-    padding: 15px;
-  }
-
-  .blog__post-title {
-    font-size: 1rem;
+// === Responsive Design ===
+@media screen and (max-width: 1024px) {
+  .p-blog_list {
+    .blog__item {
+      flex: 1 1 calc(50% - 1rem); // 2 cartes par ligne
+      max-width: calc(50% - 1rem);
+    }
   }
 }
 
-@media (max-width: 480px) {
-  .blog__post-list {
-    grid-template-columns: 1fr; 
-  }
-
-  .blog__image {
-    height: 180px; 
-  }
-
-  .blog__post-title {
-    font-size: 0.9rem;
+@media screen and (max-width: 768px) {
+  .p-blog_list {
+    .blog__item {
+      flex: 1 1 100%; // 1 carte par ligne
+      max-width: 100%;
+    }
   }
 }
 
