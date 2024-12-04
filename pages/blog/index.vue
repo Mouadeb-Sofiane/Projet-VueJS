@@ -3,27 +3,43 @@ import type { SanityDocument } from "@sanity/client";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
 
+const filter = ref ('');
+
+const page = ref (1);
+const perPage = 3;
+
+const paginationStart = computed(() => (page.value - 1) * perPage);
+const paginationEnd = computed(() => page.value * perPage);
+
+const TotalPage = computed(() => 
+  Math.ceil((postCount.value || 0) / perPage));
+
+
+const { data : postCount } = await useSanityQuery<number>(groq`count(*[
+  _type == "post"
+  && defined(slug.current)
+  && ($filter == '' || $filter in (categories[]->slug.current))
+])`,{filter});
+
+
 const POSTS_QUERY = groq`*[
   _type == "post"
   && defined(slug.current)
   && ($filter == '' || $filter in (categories[]->slug.current))   
-]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
-
+]|order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
 
 const { projectId, dataset } = useSanity().client.config();
+const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter, start: paginationStart, end: paginationEnd});
 
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null
 
+
 const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
     _type == "category"
     && defined(slug.current)]`)
-
-
-const filter = ref ('');
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter});
 
 function onCategoryClick(category: SanityDocument) {
     if (filter.value === category.slug.current) {
@@ -31,13 +47,21 @@ function onCategoryClick(category: SanityDocument) {
     } else {
         filter.value = category.slug.current
     }
+    page.value = 1
 }
+
+function onPageClick(index: number) {
+    page.value = index;
+}
+
 </script>
 
 <template>
     <div class="margin blog">
       <h1 class="blog__title">Blog</h1>
-      <div>
+        <div v-for="n in TotalPage" :key="n" @click="onPageClick(n)">
+            Page {{ n }}
+        </div>
         <div>
             filtre : {{ filter }}
             <div>
@@ -71,7 +95,7 @@ function onCategoryClick(category: SanityDocument) {
             </Button>
         </div>
       </div>
-    </div>
+    
 </template>
   
 <style setup lang="scss">
