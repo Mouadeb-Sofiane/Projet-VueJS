@@ -14,7 +14,7 @@ const handleError = () => clearError({ redirect: "/" });
         <p>Ma page d'erreur {{ error.statusCode }} personnalisée.</p>
         <p>Message : {{ error.statusMessage }}</p>
         <Button>
-            <NuxtLink @handleClick="handleError">Retour à l'accueil</NuxtLink>
+            <NuxtLink @Click="handleError">Retour à l'accueil</NuxtLink>
         </Button>
     </div>
 </template>

@@ -1,25 +1,32 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
 
-const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
+const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{title, image, body, "categories": categories[]->{_id, title, slug}} `;
 const route = useRoute();
 
-const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, { slug: route.params.slug, });
+const { data: posts } = await useSanityQuery<SanityDocument>(POST_QUERY, { slug: route.params.slug, });
 
-if(!post.value){
+if(!posts.value){
     throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable.' });
 }
 
 </script>
 
 <template>
- <div class="margin" v-if="post">
-    une page d'article de blog : {{ post }}
-    <h1>{{ post.title }}</h1>
-        <div v-if="post.image">
-            <SanityImage :asset-id="post.image.asset._ref" />
+ <div class="margin" v-if="posts">
+   
+        <div class="category" v-for="(category, index) in posts.categories" :key="index">
+            <h2>{{ category.title }}</h2>
+            <p>{{ category.slug.current }}</p>
         </div>
-    <SanityContent v-bind="{ blocks: post.body }" />
+        <h1>{{ posts.title }}</h1>
+
+        <div v-if="posts.image">
+            <SanityImage :asset-id="posts.image.asset._ref" />
+        </div>
+        <SanityContent v-bind="{ blocks: posts.body }" />
+        <SanityContent v-bind="{ blocks: posts.category }" />
+    
 
  </div>
 </template>
