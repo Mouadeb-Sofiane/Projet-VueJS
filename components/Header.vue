@@ -31,8 +31,8 @@ const closeMobileMenu = () => {
       <nav class="header__menu">
         <NuxtLink to="/" class="header__menu-item">Accueil</NuxtLink>
         <NuxtLink to="/blog" class="header__menu-item">Blog</NuxtLink>
-        <NuxtLink to="/habitude" class="header__menu-item">Mes Habitudes</NuxtLink>
-        <NuxtLink to="/connexion" class="header__menu-item">
+        <NuxtLink to="/app/dashboard" class="header__menu-item">Mes Habitudes</NuxtLink>
+        <NuxtLink to="/login" class="header__menu-item">
           <User />
         </NuxtLink>
       </nav>
@@ -40,8 +40,8 @@ const closeMobileMenu = () => {
       <div class="header__mobile-menu" :class="{ 'is-open': isOpen }">
         <NuxtLink to="/" class="header__menu-item" @click="closeMobileMenu">Accueil</NuxtLink>
         <NuxtLink to="/blog" class="header__menu-item" @click="closeMobileMenu">Blog</NuxtLink>
-        <NuxtLink to="/habitude" class="header__menu-item" @click="closeMobileMenu">Mes Habitudes</NuxtLink>
-        <NuxtLink to="/connexion" class="header__menu-item" @click="closeMobileMenu">
+        <NuxtLink to="/app/dashboard" class="header__menu-item" @click="closeMobileMenu">Mes Habitudes</NuxtLink>
+        <NuxtLink to="/login" class="header__menu-item" @click="closeMobileMenu">
           <User />
         </NuxtLink>
       </div>
