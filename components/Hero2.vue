@@ -1,66 +1,13 @@
 <script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
-
-// Requête Sanity pour récupérer les données de la homepage
-const { data: homepage } = await useSanityQuery<SanityDocument>(
-    groq`*[_type == "homepage"][0]`
-);
+defineProps<{
+        title: string;
+        text: string;
+}>();
 </script>
-
 <template>
-  <pre>
-  {{ homepage }}
-  </pre>
-  <div class="homepage">
-    <!-- Section Hero -->
-    <div class="homepage__hero">
-      <h1 class="homepage__hero-title">{{ homepage?.hero.title }}</h1>
-      <p class="homepage__hero-text">{{ homepage?.hero.text }}</p>
-
-      <!-- Image Hero -->
-      <img 
-        v-if="homepage?.hero.image" 
-        :src="homepage?.hero.image.asset.url" 
-        alt="Hero Image"
-        class="homepage__hero-image"
-      />
-
-      <!-- Statistiques du Hero -->
-      <div class="homepage__hero-stats">
-        <div v-for="(stat, index) in homepage?.hero.stats" :key="index" class="homepage__hero-stat">
-          <span class="homepage__stat-value">{{ stat.title }}</span>
-          <span class="homepage__stat-text">{{ stat.text }}</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Section Second Part Home -->
-   
-
-      <!-- Tâches du Second Part -->
-      <div class="homepage__secondpart-stats">
-        <div v-for="(task, index) in homepage?.secondparthome.tasks" :key="index" class="homepage__secondpart-stat-card">
-          <div class="homepage__stat-card-content">
-            <h2 class="homepage__stat-value">{{ task.value }}</h2>
-            <p class="homepage__stat-text">{{ task.text }}</p>
-
-            <!-- Image de chaque tâche -->
-            <div class="post__image" v-if="task.image">
-              <SanityImage :asset-id="task.image.asset._ref" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <Card v-bind=" homepage?.secondparthome" />
-      <Hero v-bind=" homepage?.hero" />
-      <Hero2 v-bind=" homepage?.hero.stat" />
-      <TaskCard v-bind=" homepage?.secondparthome.tasks" />
-    <!-- Titre de la page -->
-    <h2 class="homepage__page-title">{{ homepage?.title }}</h2>
-  </div>
- 
+    <span class="homepage__stat-value">{{ title }}</span>
+    <span class="homepage__stat-text">{{ text }}</span>
 </template>
-
 <style lang="scss" scoped>
 .homepage {
   font-family: Arial, sans-serif;
@@ -254,5 +201,4 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     max-width: 120px;
   }
 }
-
 </style>
