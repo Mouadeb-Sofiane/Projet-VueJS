@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
 import { useRoute } from 'vue-router';
+import useSanityImage from "~/composable/useSanityImage";
 
 // Requête pour récupérer un post avec ses catégories
 const POST_QUERY = groq`
@@ -12,6 +13,8 @@ const POST_QUERY = groq`
   }
 `;
 
+const { urlFor } = useSanityImage();
+
 const route = useRoute();
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {
@@ -21,6 +24,12 @@ const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {
 if (!post.value) {
   throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable.' });
 }
+
+useSeoMeta({
+    title: `${post.value.title} | trackingAPP`,
+    ogTitle: post.value.title,
+    ogImage: post.value.image && urlFor(post.value.image) ? urlFor(post.value.image)?.url() : '/algeria.jpg', 
+});
 </script>
 
 <template>
