@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import imageUrlBuilder from "@sanity/image-url";
+import useSanityImage from "~/composable/useSanityImage";
+
 
 const filter = ref ('');
 
@@ -14,6 +14,7 @@ const paginationEnd = computed(() => page.value * perPage);
 const TotalPage = computed(() => 
   Math.ceil((postCount.value || 0) / perPage));
 
+const { urlFor } = useSanityImage();
 
 const { data : postCount } = await useSanityQuery<number>(groq`count(*[
   _type == "post"
@@ -28,13 +29,17 @@ const POSTS_QUERY = groq`*[
   && ($filter == '' || $filter in (categories[]->slug.current))   
 ]|order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
 
-const { projectId, dataset } = useSanity().client.config();
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY,{filter: filter, start: paginationStart, end: paginationEnd});
 
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null
+useSeoMeta({
+  title: ' Le foot',
+  description:
+    "Le foot est une communauté francophone et d'aventuriers passionnés par le football.",
+  ogDescription:
+    " Le foot est une communauté francophone et d'aventuriers passionnés par le football.",
+  ogTitle: "Le foot",
+  ogImage: "/algeria.jpg",
+});
 
 
 const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
@@ -95,7 +100,6 @@ function onPageClick(index: number) {
             </Button>
         </div>
       </div>
-    
 </template>
   
 <style setup lang="scss">
