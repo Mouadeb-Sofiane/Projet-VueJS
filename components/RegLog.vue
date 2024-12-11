@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 const props = defineProps<{
-    variant?: "register" | "login";
+    variant: "register" | "login";
 }>();
 
 
@@ -60,7 +60,7 @@ function getText()  {
                   '-register': variant === 'register'}">
             {{ getText() }}
           </h1>
-          <Form2 action="register" :title="getTitreBouton()"/>
+          <Form2 :action="variant" :title="getTitreBouton()"/>
           <p
             :class="{'redirect': true,
                   '-login': variant === 'login',
