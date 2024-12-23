@@ -35,6 +35,7 @@ const closeMobileMenu = () => {
         <NuxtLink to="/login" class="header__menu-item">
           <User />
         </NuxtLink>
+        <Deconnexion class="header__menu-item"/>
       </nav>
 
       <div class="header__mobile-menu" :class="{ 'is-open': isOpen }">
@@ -44,6 +45,7 @@ const closeMobileMenu = () => {
         <NuxtLink to="/login" class="header__menu-item" @click="closeMobileMenu">
           <User />
         </NuxtLink>
+        <Deconnexion class="header__menu-item" @click="closeMobileMenu"/>
       </div>
     </div>
   </header>
