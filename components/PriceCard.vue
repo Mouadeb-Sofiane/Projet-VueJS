@@ -35,7 +35,7 @@ const { data: homepageData } = await useSanityQuery<SanityDocument>(
                 class="pricing-card__image"
                 alt="Pricing Image"
               />
-              <p class="pricing-card__price">{{ pricing.price }}</p>
+              <p class="pricing-card__price">{{ pricing.price }} € / mois</p>
             </div>
           </div>
         </div>

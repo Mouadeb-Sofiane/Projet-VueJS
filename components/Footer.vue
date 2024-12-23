@@ -1,129 +1,177 @@
+<script setup lang="ts">
+import type { SanityDocument } from "@sanity/client";
+
+const { data: footer } = await useSanityQuery<SanityDocument>(
+  groq`*[_type == "footer"][0]`
+);
+</script>
+
 <template>
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__column">
-          <h3 class="footer__column-title">À propos</h3>
-          <p class="footer__column-text">
-            Voici la page A propos de notre site. Vous trouverez ici des informations sur notre entreprise, nos services et notre politique de confidentialité.
-          </p>
-        </div>
+  <footer class="footer">
+    <div class="footer__container">
+    <!-- Section Navigation -->
+    <nav class="footer__nav">
+      <ul class="footer__nav__list">
+        <li v-for="(link, index) in footer?.links" :key="index" class="footer__nav__item">
+          <a :href="link.url" class="footer__nav__link">{{ link.label }}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Section Réseaux sociaux -->
+<section class="footer__social">
+  <h2 class="footer__social__title">Suivez-nous</h2>
+  <ul class="footer__social__list">
+    <li v-for="(social, index) in footer?.socialMedia" :key="index" class="footer__social__item">
+      <a :href="social.url" target="_blank" rel="noopener noreferrer" class="footer__social__link">
+        <SanityImage
+          :asset-id="social.logo.asset._ref"
+          :alt="social.platform"
+          class="footer__social__logo" 
+        />
+      </a>
+    </li>
+  </ul>
+</section>
+
+<!-- Section Nos Partenaires -->
+<section class="footer__partners">
+  <h2 class="footer__partners__title">Nos Partenaires</h2>
+  <div class="footer__partners__list">
+    <div v-for="(partner, index) in footer?.partners" :key="index" class="footer__partners__item">
+      <a :href="partner.url" target="_blank" rel="noopener noreferrer">
+        <SanityImage
+          :asset-id="partner.logo.asset._ref"
+          :alt="partner.name"
+          class="footer__partners__logo" 
+        />
+      </a>
+    </div>
+  </div>
+</section>
+
+  </div>
+    <!-- Section Copyright -->
+    <div class="footer__copyright">
+      <p>{{ footer?.copyright }}</p>
+    </div>
+  </footer>
   
-        <div class="footer__column">
-          <h3 class="footer__column-title">Liens rapides</h3>
-          <ul class="footer__column-text">
-            <li>
-              <NuxtLink to="/" class="footer__column-text">Accueil</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/habitude" class="footer__column-text">Habitude</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/connexion" class="footer__column-text">Inscription</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/connexion" class="footer__column-text">Connexion</NuxtLink>
-            </li>
-            
-          </ul>
-        </div>
-  
-        <div class="footer__column">
-          <h3 class="footer__column-title">Contact</h3>
-          <p class="footer__column-text">
-            Email: 
-            <a href="mailto:sofiane.mouadeb.70000@gmail.com" class="footer__column-text">
-              sofiane.mouadeb.70000@gmail.com
-            </a>
-          </p>
-          <p class="footer__column-text">
-            Téléphone: 
-            <a href="tel:+33783889373" class="footer__column-text">+33 7 83 88 93 73</a>
-          </p>
-        </div>
-  
-        <div class="footer__column">
-          <h3 class="footer__column-title">Suivez-moi</h3>
-          <div class="footer__social">
-            <a href="#" class="footer__social-link">Facebook</a>
-            <a href="#" class="footer__social-link">Twitter</a>
-            <a href="#" class="footer__social-link">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="footer__bottom">
-        <p>&copy; 2024 Sofiane Mouadeb. Site des habitudes.</p>
-      </div>
-    </footer>
 </template>
 
-<style setup lang="scss">
+<style lang="scss" scoped>
 .footer {
-  background-color: $BlackHeader; 
-  color: $white; 
-  padding: 2rem 0;
+  background-color: #333;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
 
   &__container {
-    max-width: rem(1200px);
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
+  &__nav {
+    margin-bottom: 2rem;
+
+    &__list {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(4, 1fr);
+    &__item {
+      list-style: none;
+    }
+
+    &__link {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
-  &__column {
-    &-title {
-      font-size: 1.25rem;
-      font-weight: bold;
+  &__partners {
+    margin-bottom: 2rem;
+
+    &__title {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: $white; 
     }
 
-    &-text {
-      color: $grey100;
+    &__list {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
 
-      a {
-        color: $white; 
-        text-decoration: none;
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        &:hover {
-          color: $grey400; 
-        }
+    &__logo {
+      border-radius: 5px;
+      transition: transform 0.3s;
+      width: 80px;  /* Taille uniforme */
+      height: 80px; /* Taille uniforme */
+      object-fit: cover;  /* Maintient la bonne couverture de l'image */
+      margin: 0 auto;
+
+      &:hover {
+        transform: scale(1.1);
       }
     }
   }
 
   &__social {
-    display: flex;
-    gap: 1rem;
+    margin-bottom: 2rem;
 
-    &-link {
-      color: $white; 
-      font-size: 1.5rem;
+    &__list {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__link {
+      color: white;
+      text-decoration: none;
 
       &:hover {
-        color: $grey400; 
+        text-decoration: underline;
       }
+    }
+
+    &__logo {
+      width: 40px;  /* Taille uniforme pour les logos des réseaux sociaux */
+      height: 40px; /* Taille uniforme pour les logos des réseaux sociaux */
+      object-fit: contain; /* Assure que l'image garde ses proportions */
+      margin: 0 auto;
     }
   }
 
-  &__bottom {
-    background-color: $BlackHeader; 
-    text-align: center;
-    padding: 1rem 0;
-    color: $grey400; 
-    font-size: 0.875rem;
+  &__copyright {
+    font-size: 0.9rem;
+    color: #ccc;
   }
 }
-</style>
-  
 
-  
+</style>
