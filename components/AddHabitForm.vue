@@ -6,13 +6,6 @@ interface Habit {
   completed: boolean;
 }
 
-const response = await fetch('http://localhost:4000/dashboard', {
-  method: 'GET',
-  headers: {
-    Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-  },
-});
-
 const emit = defineEmits(['habit:created']);
 const data = reactive({
   personalHabits: [] as Habit[],
@@ -51,9 +44,8 @@ const addHabit = async () => {
     message.value = "Erreur lors de l'ajout de l'habitude.";
   }
 };
-
-
 </script>
+
 <template>
   <div class="add-habit-form">
     <h2 class="add-habit-form__title">Ajouter une nouvelle habitude</h2>
