@@ -33,13 +33,13 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
   gap: 2rem;
   margin-top: 3rem;
   align-items: center;
-  background-color: #F4F4F4;
+  background-color: $grey75;
 
   &-card {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: #fff;
+    background: $white;
     border-radius: 16px;
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.7);
     width: 100%;
@@ -57,7 +57,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
       flex-shrink: 0;
       width: 120px;
       height: 120px;
-      background: #f5f5f5;
+      background: $grey75;
       border-radius: 16px;
       overflow: hidden;
 
@@ -75,13 +75,13 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
       &-value {
         font-size: 1.8rem;
         font-weight: bold;
-        color: #222;
+        color: $grey900;
         margin-bottom: 0.5rem;
       }
 
       &-text {
         font-size: 1rem;
-        color: #555;
+        color: $grey600;
         line-height: 1.4;
       }
     }

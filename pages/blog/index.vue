@@ -62,6 +62,7 @@ function onPageClick(index: number) {
 </script>
 
 <template>
+  <div>
     <div class="margin blog">
       <h1 class="blog__title">Blog</h1>
         <div v-for="n in TotalPage" :key="n" @click="onPageClick(n)">
@@ -100,6 +101,7 @@ function onPageClick(index: number) {
             </Button>
         </div>
       </div>
+    </div>
 </template>
   
 <style setup lang="scss">
@@ -115,8 +117,8 @@ function onPageClick(index: number) {
   }
 
   &__post {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
+    background-color: $grey50;
+    border: 1px solid $grey200;
     padding: 20px;
     border-radius: 8px;
     transition: transform 0.3s;
@@ -128,7 +130,7 @@ function onPageClick(index: number) {
 
   &__post-title {
     font-size: 1.5rem;
-    color: white;
+    color: $white;
     margin-bottom: 10px;
     text-decoration: none;
   }
@@ -140,8 +142,8 @@ function onPageClick(index: number) {
     margin-bottom: 15px;
 
     &__item {
-      background-color: #0070f3;
-      color: white;
+      background-color: $blue1;
+      color: $white;
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 0.9rem;
@@ -159,14 +161,14 @@ function onPageClick(index: number) {
   &__filter {
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: #e0e0e0;
-    color : black;
+    background-color: $grey200;
+    color : $black;
     margin-right: 10px;
     border: none;
 
     &:hover {
-      background-color: #626060;
-      color : white;
+      background-color: $grey500;
+      color : $white;
     }
   }
 }

@@ -1,1 +1,1 @@
-type EventType = `${string} ${string}`;
+// type EventType = `${string} ${string}`;

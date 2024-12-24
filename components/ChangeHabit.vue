@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+// Définition de l'interface Habit
+interface Habit {
+  id: number;  // ou string selon votre type d'ID
+  title: string;
+  description: string;
+}
+
+// Utilisation de useAsyncData pour récupérer les données du dashboard
 const { data, refresh } = await useAsyncData('dashboard', async () => {
   const response = await fetch('http://localhost:4000/dashboard', {
     method: 'GET',
@@ -12,11 +20,13 @@ const { data, refresh } = await useAsyncData('dashboard', async () => {
   return await response.json();
 });
 
-const habitToEdit = ref(null);
-const habitToDelete = ref(null);
+// Déclaration des variables ref avec les bons types
+const habitToEdit = ref<Habit | null>(null);
+const habitToDelete = ref<Habit | null>(null);
 const message = ref('');
 
-const toggleEditHabit = (habit) => {
+// Fonction pour gérer l'édition de l'habitude
+const toggleEditHabit = (habit: Habit) => {
   if (habitToEdit.value?.id === habit.id) {
     habitToEdit.value = null;
   } else {
@@ -24,6 +34,7 @@ const toggleEditHabit = (habit) => {
   }
 };
 
+// Fonctions pour gérer les événements créés, modifiés et supprimés
 function onHabitCreated() {
   refresh();
 }
@@ -38,6 +49,7 @@ function onHabitDeleted() {
   habitToDelete.value = null;
 }
 
+// Réinitialisation des actions en cours
 const resetActions = () => {
   habitToEdit.value = null;
   habitToDelete.value = null;
@@ -105,7 +117,6 @@ const resetActions = () => {
   </div>
 </template>
 
-
 <style setup lang="scss"> 
 .dashboard {
   &__title {
@@ -113,7 +124,7 @@ const resetActions = () => {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: $grey850;
     text-align: center;
   }
 
@@ -121,7 +132,7 @@ const resetActions = () => {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #333;
+    color: $grey850;
     text-align: center;
   }
 
@@ -149,7 +160,7 @@ const resetActions = () => {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid $grey300;
     border-radius: 8px;
     margin-bottom: 1rem;
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -157,12 +168,12 @@ const resetActions = () => {
     align-items: center;
 
     &:hover {
-      background-color: #f9f9f9;
+      background-color: $grey50;
     }
 
     &--editing {
-      background-color: #eef6ff;
-      border-color: #007bff;
+      background-color: $greyedit;
+      border-color: $blue1;
     }
   }
 
@@ -176,14 +187,14 @@ const resetActions = () => {
   &__habit-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #222;
+    color: $grey900;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
   &__habit-description {
     font-size: 1rem;
-    color: #555;
+    color: $grey600;
     line-height: 1.5;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -209,22 +220,22 @@ const resetActions = () => {
     }
 
     &--delete {
-      background-color: #ff4e42;
-      color: white;
+      background-color: $error-color;
+      color: $white;
       border: none;
 
       &:hover {
-        background-color: #d93f31;
+        background-color: $error-color-hover;
       }
     }
 
     &--edit {
-      background-color: #4e8ef7;
-      color: white;
+      background-color: $blue2;
+      color: $white;
       border: none;
 
       &:hover {
-        background-color: #3b74c2;
+        background-color: $blue1;
       }
     }
   }
@@ -232,9 +243,8 @@ const resetActions = () => {
   &__message {
     margin-top: 2rem;
     font-size: 1rem;
-    color: #777;
+    color: $grey500;
     text-align: center;
   }
 }
-
 </style>

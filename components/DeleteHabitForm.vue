@@ -8,7 +8,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['habit:deleted']);
+const emit = defineEmits(['habit:deleted', 'cancel-delete']);
 
 const message = ref('');
 
@@ -92,7 +92,7 @@ const cancelDelete = () => {
       color: $white;
 
       &:hover {
-        background-color: #c9302c;
+        background-color: $error-color-hover;
       }
     }
 

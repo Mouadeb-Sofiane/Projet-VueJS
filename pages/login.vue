@@ -3,6 +3,8 @@
 </script>
 
 <template>
-    <h1>Connexion</h1>
-    <RegLog variant="login" title="Connexion" />
+    <div>
+        <h1>Connexion</h1>
+        <RegLog variant="login" title="Connexion" />
+    </div>
 </template>

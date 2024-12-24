@@ -5,7 +5,7 @@ const habits = [
     title: "Lecture",
     value: 18,
     unit: "Livre",
-    description: "I'll read for 3 days, 19 hours",
+    description: "J'ai lue pendant 3 jours et 19 heures",
     gradient: "linear-gradient(135deg, #56CCF2, #2F80ED)", 
   },
   {
@@ -13,13 +13,30 @@ const habits = [
     title: "Entrainement",
     value: "62.4k",
     unit: "calories",
-    description: "Or 116 Big Macs 🍔 I'll workout for 4 days, 8 hours",
+    description: "A la place de 116 Big Macs 🍔 Je vais m'entraîner pendant 4 jours et 8 heures.",
     gradient: "linear-gradient(135deg, #F2994A, #EB5757)",
   },
+  {
+    icon: "🎮",
+    title: "Jeux",
+    value: 18,
+    unit: "Jeux",
+    description: "J'ai joué pendant 3 jours et 19 heures",
+    gradient: "linear-gradient(135deg, #E9B113, #2F80ED)",
+  },
+  {
+    icon: "🏃‍♀️",
+    title: "Sport",
+    value: 62.4,
+    unit: "km",
+    description: "A la place de 116 Big Macs 🍔 Je vais m'entraîner pendant 4 jours et 8 heures.",
+    gradient: "linear-gradient(135deg, #E9B113, #EB5757)",
+  }
 ];
 </script>
 
 <template>
+  <h2 class="dashboard__subtitle">Les habitudes les plus populaires</h2>
     <div class="habitude-cards">
       <div
         v-for="(habit, index) in habits"
@@ -41,6 +58,12 @@ const habits = [
 </template>
 
 <style setup lang="scss">
+.dashboard__subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
 .habitude-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -50,7 +73,7 @@ const habits = [
 
 .habitude-card {
   border-radius: 12px;
-  color: #fff;
+  color: $white;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;

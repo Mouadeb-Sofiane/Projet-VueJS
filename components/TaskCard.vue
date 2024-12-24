@@ -29,7 +29,7 @@ defineProps<{
   max-width: 300px;
   padding: 20px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  background: linear-gradient(135deg, $white, $grey75);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -44,7 +44,7 @@ defineProps<{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    background: linear-gradient(135deg, $pink, $pink-hover);
     border-radius: 50%;
     overflow: hidden;
 
@@ -64,13 +64,13 @@ defineProps<{
     &__value {
       font-size: 2rem;
       font-weight: bold;
-      color: #333;
+      color: $grey850;
       margin: 0;
     }
 
     &__text {
       font-size: 1rem;
-      color: #666;
+      color: $grey550;
       margin: 0.5rem 0 0;
     }
   }

@@ -13,12 +13,11 @@ defineProps<{
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 2rem;
-  background-color: #f4f4f4;
+  background-color: $grey75;
 
-  /* Hero Section */
   &__hero {
-    background-color: #333;
-    color: white;
+    background-color: $grey850;
+    color: $white;
     padding: 3rem;
     border-radius: 10px;
     text-align: center;
@@ -54,10 +53,10 @@ defineProps<{
     }
 
     &-stat {
-      background-color: #444;
+      background-color: $grey700;
       padding: 1.5rem;
       border-radius: 5px;
-      color: #fff;
+      color: $white;
       width: 180px;
       text-align: center;
 
@@ -72,16 +71,15 @@ defineProps<{
       }
 
       &--highlighted {
-        background-color: #ff6347;
+        background-color: $red;
       }
     }
   }
 
-  /* Second Part Home Section */
   &__secondpart-home {
     margin-top: 4rem;
     padding: 3rem;
-    background-color: #fff;
+    background-color: $white;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -95,7 +93,7 @@ defineProps<{
     &-text {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      color: #555;
+      color: $grey600;
     }
 
     &-image {
@@ -116,10 +114,10 @@ defineProps<{
     }
 
     &-stat-card {
-      background-color: #444;
+      background-color: $grey700;
       padding: 1.5rem;
       border-radius: 8px;
-      color: #fff;
+      color: $white;
       text-align: center;
       width: 250px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -144,7 +142,7 @@ defineProps<{
 
       &-text {
         font-size: 1rem;
-        color: #ccc;
+        color: $grey250;
       }
 
       &-image {
@@ -158,16 +156,14 @@ defineProps<{
     }
   }
 
-  /* Page Title */
   &__page-title {
     font-size: 2.2rem;
-    color: #333;
+    color: $grey850;
     text-align: center;
     font-weight: bold;
   }
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .homepage__hero-stats,
   .homepage__secondpart-stats {
@@ -190,7 +186,6 @@ defineProps<{
     height: auto;
   }
 
-  /* Second Part Cards */
   .homepage__secondpart-stat-card {
     width: 100%;
     max-width: 300px;
