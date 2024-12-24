@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+// Définition de l'interface Habit
+interface Habit {
+  id: number;  // ou string selon votre type d'ID
+  title: string;
+  description: string;
+}
+
+// Utilisation de useAsyncData pour récupérer les données du dashboard
 const { data, refresh } = await useAsyncData('dashboard', async () => {
   const response = await fetch('http://localhost:4000/dashboard', {
     method: 'GET',
@@ -12,11 +20,13 @@ const { data, refresh } = await useAsyncData('dashboard', async () => {
   return await response.json();
 });
 
-const habitToEdit = ref(null);
-const habitToDelete = ref(null);
+// Déclaration des variables ref avec les bons types
+const habitToEdit = ref<Habit | null>(null);
+const habitToDelete = ref<Habit | null>(null);
 const message = ref('');
 
-const toggleEditHabit = (habit) => {
+// Fonction pour gérer l'édition de l'habitude
+const toggleEditHabit = (habit: Habit) => {
   if (habitToEdit.value?.id === habit.id) {
     habitToEdit.value = null;
   } else {
@@ -24,6 +34,7 @@ const toggleEditHabit = (habit) => {
   }
 };
 
+// Fonctions pour gérer les événements créés, modifiés et supprimés
 function onHabitCreated() {
   refresh();
 }
@@ -38,6 +49,7 @@ function onHabitDeleted() {
   habitToDelete.value = null;
 }
 
+// Réinitialisation des actions en cours
 const resetActions = () => {
   habitToEdit.value = null;
   habitToDelete.value = null;
@@ -104,7 +116,6 @@ const resetActions = () => {
     <p class="dashboard__message">{{ message }}</p>
   </div>
 </template>
-
 
 <style setup lang="scss"> 
 .dashboard {
@@ -236,5 +247,4 @@ const resetActions = () => {
     text-align: center;
   }
 }
-
 </style>
