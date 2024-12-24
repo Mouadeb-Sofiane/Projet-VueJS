@@ -69,15 +69,7 @@ const addHabit = async () => {
       {{ message }}
     </p>
 
-    <div class="habit-list">
-      <h3>Vos habitudes</h3>
-      <ul>
-        <li v-for="habit in data.personalHabits" :key="habit.id">
-          <span>{{ habit.title }}</span>
-          <p>{{ habit.description }}</p>
-        </li>
-      </ul>
-    </div>
+    
   </div>
 </template>
 

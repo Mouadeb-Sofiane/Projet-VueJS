@@ -6,6 +6,7 @@ interface Habit {
   id: number;  // ou string selon votre type d'ID
   title: string;
   description: string;
+  completed: boolean;
 }
 
 // Utilisation de useAsyncData pour récupérer les données du dashboard
@@ -31,6 +32,27 @@ const toggleEditHabit = (habit: Habit) => {
     habitToEdit.value = null;
   } else {
     habitToEdit.value = habit;
+  }
+};
+
+// Fonction pour gérer l'achèvement d'une habitude
+const toggleHabitCompletion = async (habit: Habit) => {
+  habit.completed = !habit.completed;
+
+  const response = await fetch(`http://localhost:4000/habits/${habit.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
+    },
+    body: JSON.stringify({ completed: habit.completed }),
+  });
+
+  if (response.ok) {
+    refresh(); // Actualiser les données après modification
+    message.value = `L'état de l'habitude "${habit.title}" a été mis à jour.`;
+  } else {
+    message.value = "Erreur lors de la mise à jour de l'habitude.";
   }
 };
 
@@ -95,6 +117,13 @@ const resetActions = () => {
 
             <div class="dashboard__habit-buttons">
               <button 
+                class="dashboard__habit-button dashboard__habit-button--tracking"
+                @click="toggleHabitCompletion(habit)"
+              >
+                {{ habit.completed ? 'Marquer comme non fait' : 'Marquer comme fait' }}
+              </button>
+
+              <button 
                 class="dashboard__habit-button dashboard__habit-button--delete" 
                 @click="resetActions(); habitToDelete = habit"
               >
@@ -117,7 +146,7 @@ const resetActions = () => {
   </div>
 </template>
 
-<style setup lang="scss"> 
+<style setup lang="scss">
 .dashboard {
   &__title {
     margin: 5%;
@@ -231,6 +260,16 @@ const resetActions = () => {
 
     &--edit {
       background-color: $blue2;
+      color: $white;
+      border: none;
+
+      &:hover {
+        background-color: $blue1;
+      }
+    }
+
+    &--tracking {
+      background-color: $blue;
       color: $white;
       border: none;
 
