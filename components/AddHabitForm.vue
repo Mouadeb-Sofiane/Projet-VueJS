@@ -52,31 +52,8 @@ const addHabit = async () => {
   }
 };
 
-const toggleHabitTracking = async (habitId: number, currentStatus: boolean) => {
-  const trackingResponse = await fetch(`http://localhost:4000/habit-tracking/${habitId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-    },
-    body: JSON.stringify({
-      completed: !currentStatus,
-      date: new Date().toISOString().split('T')[0],
-    }),
-  });
 
-  if (trackingResponse.ok) {
-    const updatedHabit: Habit = await trackingResponse.json();
-    const habitIndex = data.personalHabits.findIndex((h: Habit) => h.id === habitId);
-    if (habitIndex !== -1) {
-      data.personalHabits[habitIndex].completed = updatedHabit.completed;
-    }
-  } else {
-    message.value = "Erreur lors de la mise à jour du suivi de l'habitude.";
-  }
-};
 </script>
-
 <template>
   <div class="add-habit-form">
     <h2 class="add-habit-form__title">Ajouter une nouvelle habitude</h2>
@@ -105,14 +82,13 @@ const toggleHabitTracking = async (habitId: number, currentStatus: boolean) => {
       <ul>
         <li v-for="habit in data.personalHabits" :key="habit.id">
           <span>{{ habit.title }}</span>
-          <button @click="toggleHabitTracking(habit.id, habit.completed)">
-            {{ habit.completed ? 'Marquer comme non fait' : 'Marquer comme fait' }}
-          </button>
+          <p>{{ habit.description }}</p>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
 
 <style lang="scss">
 .add-habit-form {
