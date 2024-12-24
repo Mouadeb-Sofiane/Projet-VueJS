@@ -1,4 +1,11 @@
 <script setup lang="ts">
+interface Habit {
+  id: number;
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
 const response = await fetch('http://localhost:4000/dashboard', {
   method: 'GET',
   headers: {
@@ -7,7 +14,9 @@ const response = await fetch('http://localhost:4000/dashboard', {
 });
 
 const emit = defineEmits(['habit:created']);
-const data = await response.json();
+const data = reactive({
+  personalHabits: [] as Habit[],
+});
 
 const newHabitTitle = ref('');
 const newHabitDescription = ref('');
@@ -32,7 +41,7 @@ const addHabit = async () => {
   });
 
   if (habitResponse.ok) {
-    const newHabit = await habitResponse.json();
+    const newHabit: Habit = await habitResponse.json();
     data.personalHabits.push(newHabit);
     message.value = 'Nouvelle habitude ajoutée avec succès !';
     newHabitTitle.value = '';
@@ -52,13 +61,13 @@ const toggleHabitTracking = async (habitId: number, currentStatus: boolean) => {
     },
     body: JSON.stringify({
       completed: !currentStatus,
-      date: new Date().toISOString().split('T')[0], // Format YYYY-MM-DD
+      date: new Date().toISOString().split('T')[0],
     }),
   });
 
   if (trackingResponse.ok) {
-    const updatedHabit = await trackingResponse.json();
-    const habitIndex = data.personalHabits.findIndex((h: any) => h.id === habitId);
+    const updatedHabit: Habit = await trackingResponse.json();
+    const habitIndex = data.personalHabits.findIndex((h: Habit) => h.id === habitId);
     if (habitIndex !== -1) {
       data.personalHabits[habitIndex].completed = updatedHabit.completed;
     }
