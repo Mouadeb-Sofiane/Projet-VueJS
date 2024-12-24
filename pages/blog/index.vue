@@ -62,6 +62,7 @@ function onPageClick(index: number) {
 </script>
 
 <template>
+  <div>
     <div class="margin blog">
       <h1 class="blog__title">Blog</h1>
         <div v-for="n in TotalPage" :key="n" @click="onPageClick(n)">
@@ -100,6 +101,7 @@ function onPageClick(index: number) {
             </Button>
         </div>
       </div>
+    </div>
 </template>
   
 <style setup lang="scss">

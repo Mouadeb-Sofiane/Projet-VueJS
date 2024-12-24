@@ -13,7 +13,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     <div class="homepage__testimonials-wrapper">
       <div class="homepage__testimonials-list">
         <div 
-          v-for="(temoignage, index) in homepage?.fourthparthome.temoignages" 
+          v-for="(temoignage) in homepage?.fourthparthome.temoignages" 
           :key="temoignage._key" 
           class="homepage__testimonials-item"
         >

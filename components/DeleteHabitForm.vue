@@ -8,7 +8,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['habit:deleted']);
+const emit = defineEmits(['habit:deleted', 'cancel-delete']);
 
 const message = ref('');
 

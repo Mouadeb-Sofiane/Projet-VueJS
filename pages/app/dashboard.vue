@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <ChangeHabit />
-  <Habitudes />
+  <div>
+    <ChangeHabit />
+    <Habitudes />
+  </div>
 </template>
 

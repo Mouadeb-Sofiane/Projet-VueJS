@@ -14,7 +14,7 @@ const { data: homepageData } = await useSanityQuery<SanityDocument>(
   
         <div class="homepage__pricings">
           <div
-            v-for="(pricing, index) in homepageData?.thirdparthome.princings"
+            v-for="(pricing) in homepageData?.thirdparthome.princings"
             :key="pricing._key"
             class="homepage__pricings-item"
           >
