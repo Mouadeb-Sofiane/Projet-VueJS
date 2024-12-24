@@ -1,14 +1,15 @@
 <script setup lang="ts">
-const response = await fetch('http://localhost:4000/dashboard', {
-  method: 'GET',
-  headers: {
-    Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-  },
+interface Habit {
+  id: number;
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+const emit = defineEmits(['habit:created']);
+const data = reactive({
+  personalHabits: [] as Habit[],
 });
-
-const emit = defineEmits(['habit:created'])
-
-const data = await response.json();
 
 const newHabitTitle = ref('');
 const newHabitDescription = ref('');
@@ -33,11 +34,11 @@ const addHabit = async () => {
   });
 
   if (habitResponse.ok) {
-    const newHabit = await habitResponse.json();
+    const newHabit: Habit = await habitResponse.json();
     data.personalHabits.push(newHabit);
     message.value = 'Nouvelle habitude ajoutée avec succès !';
     newHabitTitle.value = '';
-    emit('habit:created')
+    emit('habit:created');
     newHabitDescription.value = '';
   } else {
     message.value = "Erreur lors de l'ajout de l'habitude.";
@@ -51,22 +52,35 @@ const addHabit = async () => {
     <form @submit.prevent="addHabit">
       <div class="add-habit-form__group">
         <label for="title" class="add-habit-form__label">Titre de l'habitude :</label>
-        <input id="title" v-model="newHabitTitle" type="text" class="add-habit-form__input">
+        <input id="title" v-model="newHabitTitle" type="text" class="add-habit-form__input" />
       </div>
 
       <div class="add-habit-form__group">
         <label for="description" class="add-habit-form__label">Description :</label>
-        <input id="description" v-model="newHabitDescription" type="text" class="add-habit-form__input">
+        <input id="description" v-model="newHabitDescription" type="text" class="add-habit-form__input" />
       </div>
 
-      <button type="submit" class="add-habit-form__button" :disabled="!newHabitTitle || !newHabitDescription">Ajouter</button>
+      <button type="submit" class="add-habit-form__button" :disabled="!newHabitTitle || !newHabitDescription">
+        Ajouter
+      </button>
     </form>
 
     <p v-if="message" :class="['add-habit-form__message', message.includes('Erreur') ? 'add-habit-form__message--error' : 'add-habit-form__message--success']">
       {{ message }}
     </p>
+
+    <div class="habit-list">
+      <h3>Vos habitudes</h3>
+      <ul>
+        <li v-for="habit in data.personalHabits" :key="habit.id">
+          <span>{{ habit.title }}</span>
+          <p>{{ habit.description }}</p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
+
 
 <style lang="scss">
 .add-habit-form {
