@@ -18,7 +18,8 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     <StatHero v-bind=" homepage?.hero.stats" /> 
     <PriceCard v-bind=" homepage?.thirdparthome.princings" />
         <SecondPartStat v-bind=" homepage?.secondparthome.tasks" />       
-          <FourPart v-bind=" homepage?.fourthparthome.temoignages" />
+          <FourPart v-bind=" homepage?.fourthparthome.temoignages" /> 
+            <Habitudes />
   </div>
  
 </template>
@@ -29,7 +30,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background-color: #F4F4F4;
+  background-color: $grey75;
   margin-top: 3%;
 }
 

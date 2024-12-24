@@ -29,7 +29,7 @@ const logout = () => {
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #d32f2f; 
+    background-color: $error-color-hover; 
   }
 
   &:focus {

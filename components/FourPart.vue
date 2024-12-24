@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
 
-// Requête Sanity pour récupérer les données de la page d'accueil
 const { data: homepage } = await useSanityQuery<SanityDocument>(
   groq`*[_type == "homepage"][0]`
 );
@@ -38,31 +37,31 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
 <style scoped lang="scss">
 .homepage__testimonials {
   padding: 2rem;
-  background-color: #f4f4f4;
+  background-color: $grey75;
   position: relative;
 
   &-title {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
+    color: $grey850;
     margin-bottom: 1.5rem;
     text-align: center;
   }
 
   &-wrapper {
     position: relative;
-    overflow: hidden; /* Cache les éléments qui débordent */
+    overflow: hidden; 
   }
 
   &-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grille responsive */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 2rem;
     padding: 1rem 0;
   }
 
   &-item {
-    background-color: #fff;
+    background-color: $white;
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
@@ -80,25 +79,25 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     &-title {
       font-size: 1.2rem;
       font-weight: bold;
-      color: #333;
+      color: $grey850;
       margin-bottom: 0.5rem;
     }
 
     &-text {
       font-size: 1rem;
-      color: #666;
+      color: $grey550;
       margin-bottom: 1rem;
     }
 
     &-position {
       font-size: 0.9rem;
-      color: #888;
+      color: $grey450;
     }
 
     &-name {
       font-size: 1rem;
       font-weight: bold;
-      color: #333;
+      color: $grey850;
     }
 
     &-image {

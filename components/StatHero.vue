@@ -30,11 +30,11 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
 <style lang="scss" scoped>
 .homepage {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: $grey75;
 
   &__hero {
-    background-color: #333;
-    color: white;
+    background-color: $grey850;
+    color: $white;
     padding: 3rem;
     text-align: center;
     margin-bottom: 3rem;
@@ -69,10 +69,10 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     }
 
     &-stat {
-      background-color: #444;
+      background-color: $grey700;
       padding: 1.5rem;
       border-radius: 5px;
-      color: #fff;
+      color: $white;
       width: 180px;
       text-align: center;
 
@@ -87,7 +87,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
       }
 
       &--highlighted {
-        background-color: #ff6347;
+        background-color: $red;
       }
     }
   }
@@ -95,7 +95,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
   &__secondpart-home {
     margin-top: 4rem;
     padding: 3rem;
-    background-color: #fff;
+    background-color: $white;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -109,7 +109,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     &-text {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      color: #555;
+      color: $grey600;
     }
 
     &-image {
@@ -130,10 +130,10 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
     }
 
     &-stat-card {
-      background-color: #444;
+      background-color: $grey700;
       padding: 1.5rem;
       border-radius: 8px;
-      color: #fff;
+      color: $white;
       text-align: center;
       width: 250px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -158,7 +158,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
 
       &-text {
         font-size: 1rem;
-        color: #ccc;
+        color: $grey250;
       }
 
       &-image {
@@ -174,7 +174,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(
 
   &__page-title {
     font-size: 2.2rem;
-    color: #333;
+    color: $grey850;
     text-align: center;
     font-weight: bold;
   }

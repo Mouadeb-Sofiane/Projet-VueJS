@@ -20,7 +20,6 @@ defineProps<{
 </template>
 
 <style lang="scss">
-/* Grille responsive pour les cartes */
 .homepage__secondpart-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -28,21 +27,20 @@ defineProps<{
   margin-top: 20px;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr 1fr; /* 2 cartes par ligne sur les petits écrans */
+    grid-template-columns: 1fr 1fr; 
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: 1fr; /* 1 carte par ligne sur les très petits écrans */
+    grid-template-columns: 1fr; 
   }
 }
 
-/* Style pour chaque carte */
 .homepage__secondpart-stat-card {
   padding: 16px;
-  border: 1px solid #dcdcdc;
+  border: 1px solid $grey200;
   box-sizing: border-box;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: $white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,12 +59,12 @@ defineProps<{
 
   .homepage__stat-value {
     font-size: 24px;
-    color: #333;
+    color: $grey850;
     margin-top: 12px;
   }
 
   .homepage__stat-text {
-    color: #777;
+    color: $grey500;
     font-size: 16px;
     margin-top: 8px;
     text-align: center;

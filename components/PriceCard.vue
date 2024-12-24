@@ -43,14 +43,7 @@ const { data: homepageData } = await useSanityQuery<SanityDocument>(
     </div>
   </template>
 <style scoped lang="scss">
-/* Variables */
-$primary-color: #f79256;
-$text-color: #333;
-$background-color: #f4f4f4;
-$border-radius: 10px;
-$shadow-color: rgba(0, 0, 0, 0.1);
 
-/* Mixins */
 @mixin box-shadow($blur: 8px, $spread: 4px, $color: $shadow-color) {
   box-shadow: 0 $spread $blur $color;
 }
@@ -61,7 +54,6 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   }
 }
 
-/* Styles */
 .homepage {
   &__thirdpart-home {
     padding: 2rem;
@@ -95,7 +87,7 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  background-color: $white;
   padding: 1.5rem;
   border-radius: 8px;
   @include box-shadow(8px, 4px);
@@ -156,7 +148,6 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   }
 }
 
-/* Responsive adjustments */
 @include responsive-breakpoint(768px) {
   .homepage__pricings {
     flex-direction: column;

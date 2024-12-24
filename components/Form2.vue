@@ -95,8 +95,8 @@ async function onSubmit(event: Event) {
   max-width: rem(450px);
   margin: 1rem auto;
   padding: 2.5rem;
-  background: white;
-  color: black;
+  background: $white;
+  color: $black;
   border-radius: rem(8px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 

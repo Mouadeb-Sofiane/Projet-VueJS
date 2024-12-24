@@ -4,5 +4,6 @@
 
 <template>
   <ChangeHabit />
+  <Habitudes />
 </template>
 

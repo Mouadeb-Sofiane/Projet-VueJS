@@ -92,7 +92,7 @@ const cancelDelete = () => {
       color: $white;
 
       &:hover {
-        background-color: #c9302c;
+        background-color: $error-color-hover;
       }
     }
 

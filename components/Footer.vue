@@ -61,8 +61,8 @@ const { data: footer } = await useSanityQuery<SanityDocument>(
 
 <style lang="scss" scoped>
 .footer {
-  background-color: #333;
-  color: white;
+  background-color: $grey850;
+  color: $white;
   padding: 2rem;
   text-align: center;
   font-family: Arial, sans-serif;
@@ -91,7 +91,7 @@ const { data: footer } = await useSanityQuery<SanityDocument>(
     }
 
     &__link {
-      color: white;
+      color: $white;
       text-decoration: none;
       font-size: 1rem;
 
@@ -125,9 +125,9 @@ const { data: footer } = await useSanityQuery<SanityDocument>(
     &__logo {
       border-radius: 5px;
       transition: transform 0.3s;
-      width: 80px;  /* Taille uniforme */
-      height: 80px; /* Taille uniforme */
-      object-fit: cover;  /* Maintient la bonne couverture de l'image */
+      width: 80px;  
+      height: 80px; 
+      object-fit: cover;  
       margin: 0 auto;
 
       &:hover {
@@ -152,7 +152,7 @@ const { data: footer } = await useSanityQuery<SanityDocument>(
     }
 
     &__link {
-      color: white;
+      color: $white;
       text-decoration: none;
 
       &:hover {
@@ -161,16 +161,16 @@ const { data: footer } = await useSanityQuery<SanityDocument>(
     }
 
     &__logo {
-      width: 40px;  /* Taille uniforme pour les logos des réseaux sociaux */
-      height: 40px; /* Taille uniforme pour les logos des réseaux sociaux */
-      object-fit: contain; /* Assure que l'image garde ses proportions */
+      width: 40px;  
+      height: 40px; 
+      object-fit: contain; 
       margin: 0 auto;
     }
   }
 
   &__copyright {
     font-size: 0.9rem;
-    color: #ccc;
+    color: $grey250;
   }
 }
 

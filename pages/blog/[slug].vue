@@ -33,7 +33,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="post margin" v-if="post">
+  <div class="post" v-if="post">
     <h1 class="post__title">{{ post.title }}</h1>
 
     <div class="post__categories" v-if="post.categories && post.categories.length > 0">
@@ -51,12 +51,12 @@ useSeoMeta({
     </div>
 
     <div class="post__content-container">
-      <div class="post__image" v-if="post.image">
-        <SanityImage :asset-id="post.image.asset._ref" />
-      </div>
-
       <div class="post__content">
         <SanityContent v-bind="{ blocks: post.body }" />
+      </div>
+
+      <div class="post__image post__image--right" v-if="post.image">
+        <SanityImage :asset-id="post.image.asset._ref" />
       </div>
     </div>
   </div>
@@ -65,21 +65,21 @@ useSeoMeta({
 <style setup lang="scss">
 .post {
   &__title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
-    color: #333;
+    color: $grey850;
   }
 
   &__categories {
-    margin: 30px 0;
-  
+    margin: 40px 0;
+
     &__header {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #555;
-      margin-bottom: 15px;
+      color: $grey600;
+      margin-bottom: 20px;
     }
 
     &__list {
@@ -89,8 +89,8 @@ useSeoMeta({
     }
 
     &__item {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
+      background-color: $grey50;
+      border: 1px solid $grey300;
       border-radius: 8px;
       padding: 15px;
       flex: 1 1 calc(33.33% - 20px); 
@@ -109,55 +109,64 @@ useSeoMeta({
         font-size: 1.2rem;
         font-weight: bold;
         margin-bottom: 5px;
-        color: #0070f3;
+        color: $blue1;
       }
 
       &__slug {
         font-size: 0.9rem;
-        color: #999;
+        color: $grey500;
       }
-    }
-  }
-
-  &__image {
-    margin: 20px 0;
-
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      display: block;
-      margin: 0 auto;
     }
   }
 
   &__content-container {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
+    gap: 30px;
+    margin-top: 40px;
 
     @media (max-width: 768px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
   }
 
   &__content {
+    flex: 1;
     font-size: 1rem;
     line-height: 1.6;
-    color: #444;
-    margin-top: 20px;
+    color: $grey700;
 
     p {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     a {
-      color: #0070f3;
+      color: $blue1;
       text-decoration: underline;
 
       &:hover {
         text-decoration: none;
       }
+    }
+  }
+
+  &__image {
+    flex: 0 0 400px; 
+    max-width: 400px;
+    align-self: flex-start;
+    margin-left: auto;
+    margin-right: 20px; 
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+    }
+
+    &--right {
+      margin-left: 20px;
     }
   }
 }

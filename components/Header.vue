@@ -132,7 +132,7 @@ const closeMobileMenu = () => {
   }
 
   .header__menu-item {
-    color: #fff;
+    color: $white;
     text-decoration: none;
     padding: rem(10px) rem(15px);
     background: $BlackHeader;
